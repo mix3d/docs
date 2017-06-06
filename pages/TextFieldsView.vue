@@ -9,7 +9,7 @@
         doc: {
           title: 'Text fields',
           desc: 'Text fields components are used for collecting user provided information.',
-          component: 'text-fields',
+          component: 'forms/TextField.js',
           edit: 'TextFieldsView',
           examples: [
             { header: 'With label', file: 'text-fields/1', desc: 'Text-fields come in two theme options, dark and light.' },
