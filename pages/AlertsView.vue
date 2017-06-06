@@ -9,7 +9,7 @@
     data () {
       return {
         doc: {
-          component: 'alerts',
+          component: 'alerts/Alert.js',
           edit: 'AlertsView',
           title: 'Alert',
           desc: 'The <code>v-alert</code> component is used to convey information to the user. Designed to stand out, the alerts come in four contextual styles, success, info, warning, and error.',
