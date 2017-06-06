@@ -10,7 +10,7 @@
             div.do-not-remove-this
               v-btn(
                 tag="a"
-                v-bind:href="'https://github.com/vuetifyjs/vuetify/tree/master/components/'+doc.component"
+                v-bind:href="'https://github.com/vuetifyjs/vuetify/tree/master/src/components/'+doc.component"
                 target="_blank"
                 icon
                 light
