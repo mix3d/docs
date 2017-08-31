@@ -1,6 +1,6 @@
 <template>
   <div class="text-xs-center">
-    <v-pagination v-bind:length.number="6" v-model="page" total-visible="3"></v-pagination>
+    <v-pagination :length="6" v-model="page"></v-pagination>
   </div>
 </template>
 

@@ -22,12 +22,14 @@
             { header: 'Dark theme multi-line', file: 'text-fields/8', desc: 'Multi-line text-fields can be set to autogrow allowing the field to scale with the input.' },
             { header: 'Character counter', file: 'text-fields/9', desc: 'Use a counter to inform a user of the maximum or minium character limit.' },
             { header: 'Password input', file: 'text-fields/10', desc: 'A password input can be used with an appended icon and callback to control the visibility.' },
-            { header: 'Multi-line with character counter', file: 'text-fields/11', desc: `The rules prop accepts an array of callbacks. While validating rules, the current v-model value will be passed to the callback. This callback should return either <code>true</code> or a <code>String</code>, the error message.` },
+            { header: 'Validation', file: 'text-fields/11', desc: `Vuetify includes simple validation through the <code>rules</code> prop. The prop accepts an array of callbacks. While validating rules, the current v-model value will be passed to the callback. This callback should return either <code>true</code> or a <code>String</code>, the error message.` },
             { header: 'Full-width text field with character counter', file: 'text-fields/12', desc: 'Light theme' },
-            { header: 'Required fields', file: 'text-fields/13', desc: 'Light theme' },
+            { header: 'Required fields', file: 'text-fields/13', desc: 'In this example two of the text-fields are required. We utilize the <strong>required</strong> prop in order to apply an asterisk to the label and rules to validate the fields.' },
             { header: 'Hint text', file: 'text-fields/14', desc: 'Light theme' },
             { header: 'Prefixes & suffixes', file: 'text-fields/15', desc: 'Light theme' },
-            { header: 'Custom validation', file: 'text-fields/16', desc: 'If you want to skip the built in validation and use your own or a plugin such as <a href="https://github.com/monterail/vuelidate" target="_blank">vuelidate</a> or <a href="https://github.com/logaretm/vee-validate" target="_blank">vee-validation</a>, you can use the <strong>errors</strong> or <strong>error</strong> props. Errors accepts a string or array and error simply places the field in an error state.' }
+            { header: 'Custom validation', file: 'text-fields/16', desc: 'While the built in <code>v-form</code> or 3rd party plugin such as <a href="https://github.com/monterail/vuelidate" target="_blank" rel="noopener">vuelidate</a> or <a href="https://github.com/logaretm/vee-validate" target="_blank" rel="noopener">vee-validation</a> can help streamline your validation process, you can choose to simply control it yourself.' },
+            { header: 'Textarea', file: 'text-fields/17', desc: 'Textarea text-fields have an alternate style.'},
+            { header: 'Box style', file: 'text-fields/18', desc: 'Text-fields can be used with an alternative box design. Append and prepend icon props are <strong>not</strong> supported in this mode.' }
           ],
           props: {
             'v-text-field': {
@@ -43,11 +45,11 @@
                   'auto-grow',
                   'Boolean',
                   'False',
-                  'Auto-grows the input'
+                  'Auto-grows the input. This option <strong>requires</strong> the use of <code>v-model</code>'
                 ],
                 [
                   'counter',
-                  'Boolean',
+                  '[String, Number]',
                   'False',
                   'Creates counter for input length'
                 ],
@@ -62,24 +64,6 @@
                   'String',
                   '',
                   'Displays prefix text'
-                ],
-                [
-                  'min',
-                  'Number',
-                  '0',
-                  'Sets minimum value for attribute'
-                ],
-                [
-                  'max',
-                  'Number',
-                  '25',
-                  'Sets maximum value for attribute'
-                ],
-                [
-                  'maxlength',
-                  'Number',
-                  '25',
-                  'Sets maximum value for a text-field'
                 ],
                 [
                   'multi-line',
@@ -106,6 +90,18 @@
                   'Label does not move on focus/dirty'
                 ],
                 [
+                  'solo',
+                  'Boolean',
+                  'False',
+                  'Changes the style of the text-field for use in toolbars'
+                ],
+                [
+                  'textarea',
+                  'Boolean',
+                  'False',
+                  'Textarea text-field with alternate style'
+                ],
+                [
                   'suffix',
                   'String',
                   '',
@@ -125,6 +121,11 @@
               }
             }
           },
+          slots: {
+            'v-text-field': {
+              shared: ['label']
+            }
+          },
           events: {
             'v-text-field': {
               params: [
@@ -137,25 +138,6 @@
           }
         }
       }
-    },
-
-    mounted () {
-      this.$emit('view', this.meta())
-    },
-
-    preFetch () {
-      return this.methods.meta()
-    },
-
-    methods: {
-      meta () {
-        return {
-          title: 'Text fields Input Components | Vuetify.js',
-          h1: 'Text fields',
-          description: 'Text fields input components for Vuetify Framework',
-          keywords: 'vuetify, form, components'
-        }
-      }
     }
   }
 </script>
@@ -163,7 +145,7 @@
 <style lang="stylus">
   #text-fields-view
     main
-      
+
     .container
       min-height: 0
 </style>

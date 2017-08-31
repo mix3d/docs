@@ -1,167 +1,184 @@
 <template lang="pug">
-  div#home-view
-    v-toolbar(fixed :class="[toolbar ? 'toolbar--home' : 'transparent elevation-0']" light)
-      img(src="/static/v.png" height="38px")
+  #home-view
+    v-toolbar(fixed :class="[toolbar ? 'toolbar--home' : 'hidden']" ).white.text-xs-center
+      img(src="/static/doc-images/header-logo.svg" height="38px")
       v-spacer
-      v-toolbar-items
-        v-toolbar-item(
-          to="/vuetify/quick-start"
-          router
-        )
-          span.subheading Documentation
-        v-toolbar-item(
-          href="https://github.com/vuetifyjs/vuetify/releases"
-          target="_blank"
-        ) 
-          span.subheading Updates
+      v-btn(flat to="/vuetify/quick-start") Documentation
+      v-btn(flat tag="a" href="https://github.com/vuetifyjs/vuetify/releases" target="_blank" rel="noopener").hidden-xs-only Updates
 
-    section#hero.elevation-12
-      v-parallax(src="/static/doc-images/vbanner.jpg" height="400")
-        v-layout(row align-vert-center align-horiz-center)
-          v-flex(xs12).text-xs-center
-            h1.grey--text.text--lighten-4.display-2 Vuetify.js
-            div.grey--text.text--lighten-4.headline.hidden-xs-only Material Component Framework
-            div.mt-5
-              v-btn(
-                large
-                tag="a"
-                href="https://github.com/vuetifyjs/vuetify"
-              ).grey.lighten-2
-                v-icon(fa left medium) github
-                span Github
-              v-btn(light large router href="/vuetify/quick-start").green.lighten-2
-                span Get Started
-                v-icon(right light) chevron_right
-
-    section#development.text-xs-center.pa-5
-      v-container(fluid)
-        v-layout(row)
-          v-flex(xs12)
-            img(
-              src="static/doc-images/featured.png"
-              width="100%"
-              style="max-width: 1024px"
-            )
-      h2.display-2 Supercharge your Development
-      span.headline With the power of Vue and Material Design
-
-    v-divider
-
-    section#features.pb-5.pt-3
-      v-container(style="max-width: 1024px")
+    section#hero
+      v-container(grid-list-xl)
         v-layout(row wrap)
-          v-flex(sm12).my-5
-            v-layout(row)
-              v-flex(xs12 sm6 layout row align-end justify-center)
-                v-card.transparent.elevation-0.pa-3
-                  v-card-title.pl-0.pt-0 Premade Templates
-                  div.grey--text.text--darken-1 Vuetify comes ready to go with 5 pre-made vue-cli templates. Ranging from a simple html to a full blown SSR (server side rendered) application. No matter what the project, you are ready to go in minutes with your next great idea.
-              v-flex(xs6).hidden-xs-only
-                v-card(height="280px" img="/static/vuetify_cli.svg")
-          v-flex(sm12).my-5
-            v-layout(row)
-              v-flex(xs6).hidden-xs-only
-                v-card(height="280px" img="/static/vuetify_layout2.svg")
-              v-flex(xs12 sm6 layout row align-end justify-center)
-                v-card.transparent.elevation-0.pa-3
-                  v-card-title.pl-0.pt-0 Custom layouts
-                  div.grey--text.text--darken-1 Each and every available layout from the Material design spec is at your disposal. Create unique and flexible user interfaces that fit the scope of any task.
-          v-flex(sm12).my-5
-            v-layout(row)
-              v-flex(xs12 sm6 layout row align-start justify-center)
-                v-card.transparent.elevation-0.pa-3
-                  v-card-title.pl-0.pt-0 Semantic components
-                  div.grey--text.text--darken-1 Every component has been meticulously crafted to offer the easiest, most understandable interface and robust api of properties that will customize the experience delivered in your next application.
-              v-flex(xs6).hidden-xs-only
-                v-card(height="280px" img="/static/vuetify_semantic.svg")
-          v-flex(sm12).my-5
-            v-layout(row)
-              v-flex(xs6).hidden-xs-only
-                v-card(height="280px" img="/static/vuetify_sizes.svg")
-              v-flex(xs12 sm6 layout column align-start justify-center)
-                v-card.transparent.elevation-0.pa-3
-                  v-card-title.pl-0.pt-0 Material design framework
-                  div.grey--text.text--darken-1 Be prepared to have an armada of specialized components at your disposal. With over 80 in total, there is a solution for any situation.
+          v-flex(xs12 md4).text-xs-center
+            img(src="/static/doc-images/logo.svg").logo
+          v-flex(xs12 md8).text-xs-center.text-md-left
+            v-layout(row wrap :class="{\
+              'justify-center': $vuetify.breakpoint.smAndDown\
+            }")
+              v-flex(xs12).py-1
+                h1.mb-0 Vuetify
+              v-flex(xs12).py-1
+                h2 Material Component Framework
+              v-flex(xs12 sm8 md6 lg4)
+                v-btn(block dark large to="/vuetify/quick-start").blue
+                  span Documentation
+              v-flex(xs12 sm8 md6 lg4)
+                v-btn(
+                  large
+                  block
+                  tag="a"
+                  href="https://github.com/vuetifyjs/vuetify"
+                  target="_blank"
+                  rel="noopener"
+                ).white.primary--text
+                  v-icon(left).primary--text fa-github
+                  span Github
 
-    v-divider
+    div#section-body
+      section#features.mb-3
+          v-container
+            v-card.elevation-2
+              v-card-text.py-5
+                v-layout(row wrap)
+                  v-flex(xs12 md4).text-xs-center.my-3
+                    img(src="/static/doc-images/feature1.svg")
+                    h3.mt-4.mb-3 Vue-CLI Templates
+                    p Vuetify comes ready to go with 5 pre-made vue-cli templates. From simple html to full-blown SSR, you are ready to go in minutes.
 
-    section#sponsors.py-5.mb-0
-      v-container( fluid)
-        v-layout(row)
-          v-flex(xs10 offset-xs1).text-xs-center
-            h4.headline.text-xs-center.mb-5 Vuetify.js is proudly sponsored by
-            a(href="https://www.browserstack.com/")
-              img(width="300px" height="50px" src="/static/doc-images/browser-stack.svg")
+                  v-flex(xs12 md4).text-xs-center.my-3
+                    img(src="/static/doc-images/feature2.svg")
+                    h3.mt-4.mb-3 Custom Layouts
+                    p Each and every available layout from the Material design spec is at your disposal. Create unique and flexible user interfaces that fit the scope of any project.
 
-    section#support.py-5.grey.lighten-4.mb-0
-      v-container(fluid)
-        v-layout(row wrap).text-xs-center
-          v-flex(xs12).mb-5
-            h4.headline.pb-3 Support Vuetify.js
-            p Has Vuetify helped you create an amazing application? You can show your support by making a donation in one of two ways:
-          v-flex(xs12 sm6).mb-3
-            a(
-              href="https://www.patreon.com/vuetify"
-              target="_blank"
-            ).dark--text
-              div.display-1.mb-2 Patreon
-              img(src="/static/doc-images/patreon.png" width="125px")
-          v-flex(xs12 sm6).mb-3
-            a(
-              href="https://paypal.me/vuetify"
-              target="_blank"
-            ).dark--text
-              div.display-1.mb-2 Paypal
-              img(src="/static/doc-images/paypal.png" width="125px")
+                  v-flex(xs12 md4).text-xs-center.my-3
+                    img(src="/static/doc-images/feature3.svg")
+                    h3.mt-4.mb-3 Semantic Material Components
+                    p Be prepared for an armada of specialized components at your disposal. With over 80 in total, there is a solution for any application.
 
-    v-footer.secondary.white--text
-      v-layout(row flex)
-        v-flex(xs6)
-          span © {{ new Date().getFullYear() }} John Leider
-        v-flex(xs6).text-xs-right
-          span MIT License
+      section#sponsors.mb-3
+          v-container
+            v-card.elevation-2
+              v-card-text.py-5
+                h2.mb-5.text-xs-center Proudly sponsored by:
+                v-layout(row wrap align-center justify-center)
+                  v-flex(xs12 md3 v-for="(sponsor, i) in sponsors" :key="i").text-xs-center
+                      a(:href="sponsor.href" target="_blank" :title="sponsor.title" rel="noopener")
+                        img(:src="sponsor.src").sponsor
+                  v-flex(xs12).text-xs-center
+                    v-btn(to="/vuetify/sponsors-and-backers" large).white.primary--text Become a backer
+                      v-icon(right).primary--text fa-arrow-circle-right
+
+      section#support.mb-3
+          v-container
+            v-card.elevation-2
+              v-card-text.py-5
+                v-layout(row wrap).text-xs-center
+                  v-flex(xs12).mb-5
+                    h2 Has Vuetify helped you create an amazing application?<br> <br class="hidden-md-and-up"> You can show your support by making a <strong>donation</strong> in one of two ways:
+                  v-flex(xs12 sm3 offset-sm3)
+                    a(
+                      href="https://www.patreon.com/vuetify"
+                      target="_blank" rel="noopener"
+                    )
+                      div.display-1.my-3 Patreon
+                      img(src="/static/doc-images/patreon.png" width="125px")
+                  v-flex(xs12 sm3)
+                    a(
+                      href="https://paypal.me/vuetify"
+                      target="_blank" rel="noopener"
+                    )
+                      div.display-1.my-3 PayPal
+                      img(src="/static/doc-images/paypal.png" width="125px")
+
+      section#footer-hero.mb-0
+        v-container
+          v-layout(row wrap)
+            v-flex(xs12 md8 lg10)
+              img(src="/static/doc-images/logo.svg" height="90px")
+              h2.mt-4.mb-5 Supercharge Your Development with the Power of Vue and Material Design
+
+    footer
+      v-layout(row wrap)
+        v-flex(xs6 sm3).vuetify
+          h5
+            img(src="/static/doc-images/logo.svg")
+            span Vuetify
+          ul
+            li
+              a(href="https://vuetifyjs.com/vuetify/quick-start")
+                span.hidden-sm-only Documentation
+                span.hidden-md-and-up.hidden-xs-only Docs
+            li
+              a(href="https://github.com/vuetifyjs/vuetify" target="_blank") <v-icon dark class="hidden-sm-only">fa-github</v-icon>  GitHub
+            li
+              a(href="https://twitter.com/vuetifyjs" target="_blank") <v-icon dark class="hidden-sm-only">fa-twitter</v-icon>  Twitter
+            li
+              a(href="https://www.facebook.com/vuetifyjs" target="_blank") <v-icon dark class="hidden-sm-only">fa-facebook</v-icon>  Facebook
+
+        v-flex(xs6 sm3)
+          h5 Donate
+          ul
+            li
+              a(href="https://www.patreon.com/vuetify" target="_blank") Patreon
+            li
+              a(href="https://www.paypal.me/vuetify" target="_blank") PayPal
+
+        v-flex(xs6 sm3)
+          h5 Sponsors
+          ul
+            li
+              a(href="https://www.browserstack.com/" target="_blank") BrowserStack
+            li
+              a(href="https://www.cloudflare.com/" target="_blank") CloudFlare
+
+        v-flex(xs6 sm3)
+          h5 Links
+          ul
+            li
+              a( href="https://vuejs.org/" target="_blank") Vue.js
+            li
+              a( href="https://material.io/guidelines/" target="_blank") Material Design
+
+
+
+      .legal-footer.text-xs-center
+        span &copy; {{ new Date().getFullYear() }} Vuetify LLC. Distributed under the
+        a(
+          href="https://opensource.org/licenses/MIT"
+          target="_blank"
+        )  MIT License.
+
 </template>
 
 <script>
   export default {
-    data () {
+    data() {
       return {
+        sponsors: [
+          {
+            title: 'BrowserStack',
+            href: 'https://www.browserstack.com/',
+            src: '/static/doc-images/browser-stack.svg'
+          },
+          {
+            title: 'Cloudflare',
+            href: 'https://www.cloudflare.com/',
+            src: '/static/doc-images/cloudflare.svg'
+          }
+        ],
         toolbar: false
       }
     },
-    mounted () {
+    mounted() {
       window.addEventListener('scroll', this.onScroll, { passive: true })
     },
-    beforeDestroy () {
+    beforeDestroy() {
       window.removeEventListener('scroll', this.onScroll, { passive: true })
     },
     methods: {
-      onScroll () {
-        this.toolbar = window.scrollY > 0
+      onScroll() {
+        this.toolbar = window.scrollY > 300
       }
     }
   }
 </script>
-
-<style lang="stylus">
-  @import '../node_modules/vuetify/src/stylus/settings/_colors'
-  
-  #home-view
-    .toolbar--home
-      background: #132563
-
-    #support
-      a
-        text-decoration: none
-
-    #hero
-      .btn
-        width: 190px
-    
-    div.grey--text
-      line-height: 2
-        
-  #features
-    .card__column.transparent
-      height: 150px !important
-</style>

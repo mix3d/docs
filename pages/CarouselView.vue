@@ -32,6 +32,7 @@
           ],
           props: {
             'v-carousel': {
+              shared: ['theme'],
               params: [
                 [
                   'cycle',
@@ -46,6 +47,18 @@
                   'Sets icon for carousel delimiter'
                 ],
                 [
+                  'left-control-icon',
+                  '[Boolean, String]',
+                  'chevron_left',
+                  'Sets icon for left carousel control, false removes icon'
+                ],
+                [
+                  'right-control-icon',
+                  '[Boolean, String]',
+                  'chevron_right',
+                  'Sets icon for right carousel control, false removes icon'
+                ],
+                [
                   'interval',
                   'Number',
                   '6000',
@@ -58,7 +71,7 @@
                 [
                   'src',
                   'String',
-                  'Required',
+                  '-',
                   'The image src',
                 ],
                 [

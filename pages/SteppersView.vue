@@ -56,10 +56,10 @@
             'v-stepper-step': {
               params: [
                 [
-                  'completed',
+                  'complete',
                   'Boolean',
                   'False',
-                  'Marks step as completed',
+                  'Marks step as complete',
                 ],
                 [
                   'complete-icon',

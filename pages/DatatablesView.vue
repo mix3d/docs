@@ -14,14 +14,19 @@
           desc: `The <code>v-data-table</code> component is used for displaying tabular data. Features include sorting, searching, pagination, inline-editing, header tooltips, and row selection.`,
           examples: [
             { header: 'Standard', file: 'tables/1', desc: 'The standard data-table contains data with no additional functionality. You can opt out of displaying table actions that allow you to control the pagination of information with the <code>hide-actions</code> prop.' },
+            { header: 'Slots: items and headers', file: 'tables/7', desc: 'The <code>items</code> and <code>headers</code> slots can accept either a collection of <kbd>td/th</kbd> tags, or if you want control of the entire row, a <kbd>tr</kbd> tag.' },
+            { header: 'Slots: headerCell', file: 'tables/8', desc: 'If you only want to apply some common markup or effect on each of the header cells, you can use the slot <code>headerCell</code>. In this example is has been used to apply a tooltip to each header.' },
+            { header: 'Slots: footer', file: 'tables/10', desc: 'There is also a <code>footer</code> slot for when you want to add some extra functionality to tables, for example per column filtering or search.' },
             { header: 'Selectable rows', file: 'tables/2', desc: 'Selectable rows allow you to perform an action on specific and all rows.' },
             { header: 'Search with custom page text', file: 'tables/3', desc: 'The data table exposes a <code>search</code> prop that allows you to filter your data.' },
             { header: 'External pagination', file: 'tables/4', desc: 'Pagination can be controlled externally by using the <code>pagination</code> prop. Remember that you must apply the <code>.sync</code> modifier.' },
             { header: 'External sorting', file: 'tables/5', desc: 'Sorting can also be controlled externally by using the <code>pagination</code> prop. Remember that you must apply the <code>.sync</code> modifier. You can also use the prop to set the default sorted column.' },
-            { header: 'Paginate and sort server-side', file: 'tables/6', desc: 'If you\'re loading data from a backend and want to paginate and sort the results before displaying them, you can use the <code>total-items</code> prop. Defining this prop will disable the built-in sorting and pagination, and you will instead need to use the <code>pagination</code> prop to listen for changes. Use the <code>loading</code> prop to display a progress bar while fetching data.'}
+            { header: 'Paginate and sort server-side', file: 'tables/6', desc: 'If you\'re loading data from a backend and want to paginate and sort the results before displaying them, you can use the <code>total-items</code> prop. Defining this prop will disable the built-in sorting and pagination, and you will instead need to use the <code>pagination</code> prop to listen for changes. Use the <code>loading</code> prop to display a progress bar while fetching data.'},
+            { header: 'Theme support', file: 'tables/9', desc: 'The <code>v-data-table</code> component supports the application dark theme.'}
           ],
           props: {
             'v-data-table': {
+              shared: ['filterable', 'theme'],
               params: [
                 [
                   'headers',
@@ -48,12 +53,6 @@
                   'The array of table rows'
                 ],
                 [
-                  'no-data-text',
-                  'String',
-                  'No data available in table',
-                  'Display text when there is no table data.'
-                ],
-                [
                   'no-results-text',
                   'String',
                   'No matching records found',
@@ -75,7 +74,7 @@
                   'select-all',
                   '[Boolean, String]',
                   'False',
-                  'Adds header row select all checkbox. Can either be a String which specifies which color is applied to the button (primary, secondary, success, info, warning, error) or a Boolean (which uses the primary color).'
+                  'Adds header row select all checkbox. Can either be a String which specifies which color is applied to the button, or a Boolean (which uses the default color).'
                 ],
                 [
                   'selected-key',
@@ -126,6 +125,7 @@
                   'pagination.sync',
                   'Object',
                   `{
+                    sortBy: 'column',
                     page: 1,
                     rowsPerPage: 5,
                     descending: false,
@@ -179,12 +179,16 @@
             'v-data-table': {
               params: [
                 [
+                  'scope[headerCell]',
+                  'The scoped slot for each individual header cell. The available prop is <code>header</code> which is the current header. Can be used to apply some markup or effect to each cell, such as a tooltip.'
+                ],
+                [
                   'scope[headers]',
-                  'The scoped slot for modifying headers.'
+                  `The scoped slot for templating the headers. Provide either a <kbd>tr</kbd> tag or <kbd>th</kbd> tags for all headers. Scope properties <code>headers</code>, <code>indeterminate</code>, and <code>all</code>.`
                 ],
                 [
                   'scope[items]',
-                  'The scoped slot for templating the row display. Available props are the currently iterated <code>item</code> and its <code>index</code>.'
+                  'The scoped slot for templating the row display. Available props are the currently iterated <code>item</code> and its <code>index</code> wthin the iterated items array. Provide either a <kbd>tr</kbd> tag or <kbd>th</kbd> tags for all columns.'
                 ],
                 [
                   'scope[pageText]',
@@ -212,25 +216,9 @@
       }
     },
 
-    mounted () {
-      this.$emit('view', this.meta())
-    },
-
-    preFetch () {
-      return this.methods.meta()
-    },
-
     methods: {
       saving () {
         console.log('I saved!')
-      },
-      meta () {
-        return {
-          title: 'Data tables | Vuetify.js',
-          h1: 'Data tables',
-          description: 'The v-data-table component is used for displaying tabular data. Features include sorting, searching, pagination, inline-editing, header tooltips, and row selection.',
-          keywords: 'vuetify, components, data tables'
-        }
       }
     }
   }

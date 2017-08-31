@@ -2,19 +2,20 @@
   <v-layout row>
     <v-flex xs12 sm6 offset-sm3>
       <v-card>
-        <v-toolbar class="white--text pink" light>
-          <v-toolbar-side-icon light></v-toolbar-side-icon>
+        <v-toolbar class="white--text pink" dark>
+          <v-toolbar-side-icon></v-toolbar-side-icon>
           <v-toolbar-title>Inbox</v-toolbar-title>
-          <v-btn icon light>
+          <v-spacer></v-spacer>
+          <v-btn icon>
             <v-icon>search</v-icon>
           </v-btn>
-          <v-btn icon light>
+          <v-btn icon>
             <v-icon>check_circle</v-icon>
           </v-btn>
         </v-toolbar>
         <v-list two-line>
-          <v-list-item v-for="(item, index) in items" v-bind:key="index">
-            <v-list-tile avatar ripple>
+          <template v-for="(item, index) in items">
+            <v-list-tile avatar ripple v-bind:key="index" @click="">
               <v-list-tile-content>
                 <v-list-tile-title>{{ item.title }}</v-list-tile-title>
                 <v-list-tile-sub-title class="grey--text text--darken-4">{{ item.headline }}</v-list-tile-sub-title>
@@ -26,7 +27,7 @@
               </v-list-tile-action>
             </v-list-tile>
             <v-divider v-if="index + 1 &lt; items.length"></v-divider>
-          </v-list-item>
+          </template>
         </v-list>
       </v-card>
     </v-flex>

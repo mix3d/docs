@@ -1,5 +1,5 @@
 <template lang="pug">
-  v-app
+  v-app(toolbar footer)
     main-navigation
     main-toolbar
     main
@@ -7,6 +7,19 @@
         transition(name="slide" mode="out-in")
           router-view
     main-footer
+    v-fab-transition
+      v-btn(
+        fab
+        dark
+        fixed
+        bottom
+        right
+        class="red"
+        v-scroll="onScroll"
+        v-show="fab"
+        @click="toTop"
+      )
+        v-icon keyboard_arrow_up
 </template>
 
 <script>
@@ -19,6 +32,29 @@
       MainNavigation,
       MainToolbar,
       MainFooter
+    },
+
+    data: () => ({
+      fab: false
+    }),
+
+    mounted () {
+      this.$vuetify.load(this.onScroll)
+    },
+
+    methods: {
+      onScroll () {
+        if (typeof window === 'undefined') return
+
+        const top = window.pageYOffset ||
+          document.documentElement.offsetTop ||
+          0
+
+        this.fab = top > 300
+      },
+      toTop () {
+        window.scrollTo(0, 0)
+      }
     }
   }
 </script>

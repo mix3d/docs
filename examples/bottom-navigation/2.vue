@@ -3,7 +3,8 @@
     <v-bottom-nav
       absolute
       shift
-      value="true"
+      :value="true"
+      :active.sync="e2"
       :class="{
         'blue-grey': e2 === 1,
         'teal': e2 === 2,
@@ -11,19 +12,19 @@
         'brown lighten-1': e2 === 4
       }"
     >
-      <v-btn flat light @click.native="e2 = 1" :value="e2 === 1">
+      <v-btn dark>
         <span>Video</span>
         <v-icon>ondemand_video</v-icon>
       </v-btn>
-      <v-btn flat light @click.native="e2 = 2" :value="e2 === 2">
+      <v-btn dark>
         <span>Music</span>
         <v-icon>music_note</v-icon>
       </v-btn>
-      <v-btn flat light @click.native="e2 = 3" :value="e2 === 3">
+      <v-btn dark>
         <span>Book</span>
         <v-icon>book</v-icon>
       </v-btn>
-      <v-btn flat light @click.native="e2 = 4" :value="e2 === 4">
+      <v-btn dark>
         <span>Image</span>
         <v-icon>image</v-icon>
       </v-btn>

@@ -1,15 +1,15 @@
 <template>
   <v-layout justify-space-around>
-    <v-icon large dark>note</v-icon>
+    <v-icon>mdi-anchor</v-icon>
 
-    <v-icon large dark>mic</v-icon>
+    <v-icon>mdi-xbox-controller</v-icon>
 
-    <v-icon large dark>new_releases</v-icon>
+    <v-icon>mdi-watch</v-icon>
 
-    <v-icon large dark>equalizer</v-icon>
+    <v-icon>mdi-tilde</v-icon>
 
-    <v-icon large dark>repeat_one</v-icon>
+    <v-icon>mdi-tennis</v-icon>
 
-    <v-icon large dark>replay</v-icon>
+    <v-icon>mdi-mouse</v-icon>
   </v-layout>
 </template>

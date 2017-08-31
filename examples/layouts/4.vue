@@ -1,20 +1,26 @@
 <template>
-  <v-app id="example-3">
-    <v-navigation-drawer permanent floating light>
-      <v-list dense class="pt-0">
-        <v-list-item v-for="item in items" :key="item">
-          <v-list-tile>
-            <v-list-tile-action>
-              <v-icon>{{ item.icon }}</v-icon>
-            </v-list-tile-action>
-            <v-list-tile-content>
-              <v-list-tile-title>{{ item.title }}</v-list-tile-title>
-            </v-list-tile-content>
-          </v-list-tile>
-        </v-list-item>
+  <v-app id="example-1" toolbar footer dark>
+    <v-navigation-drawer
+      persistent
+      v-model="drawer"
+      light
+      enable-resize-watcher
+      overflow
+      dark
+    >
+      <v-list dense>
+        <v-list-tile @click="">
+          <v-list-tile-action>
+            <v-icon>home</v-icon>
+          </v-list-tile-action>
+          <v-list-tile-content>
+            <v-list-tile-title>Home</v-list-tile-title>
+          </v-list-tile-content>
+        </v-list-tile>
       </v-list>
     </v-navigation-drawer>
-    <v-toolbar class="green" light>
+    <v-toolbar dark>
+      <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
       <v-toolbar-title>Toolbar</v-toolbar-title>
     </v-toolbar>
     <main>
@@ -22,6 +28,9 @@
         <!--v-router-->
       </v-container>
     </main>
+    <v-footer dark>
+      <span class="white--text">&copy; 2017</span>
+    </v-footer>
   </v-app>
 </template>
 
@@ -29,12 +38,7 @@
   export default {
     data () {
       return {
-        drawer: null,
-        items: [
-          { title: 'Home', icon: 'dashboard' },
-          { title: 'About', icon: 'question_answer' }
-        ],
-        right: null
+        drawer: true
       }
     }
   }

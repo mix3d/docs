@@ -1,33 +1,37 @@
 <template>
-  <v-app id="example-2">
-    <v-navigation-drawer permanent light>
-      <v-list class="pa-0">
-        <v-list-item>
-          <v-list-tile avatar tag="ul"></v-list-tile>
-        </v-list-item>
-      </v-list>
-      <v-divider></v-divider>
-      <v-list dense class="pt-0">
-        <v-list-item v-for="item in items" :key="item">
-          <v-list-tile>
-            <v-list-tile-action>
-              <v-icon>{{ item.icon }}</v-icon>
-            </v-list-tile-action>
-            <v-list-tile-content>
-              <v-list-tile-title>{{ item.title }}</v-list-tile-title>
-            </v-list-tile-content>
-          </v-list-tile>
-        </v-list-item>
+  <v-app id="example-1" toolbar footer>
+    <v-navigation-drawer
+      persistent
+      v-model="drawer"
+      light
+      enable-resize-watcher
+      overflow
+      right
+    >
+      <v-list dense>
+        <v-list-tile @click="">
+          <v-list-tile-action>
+            <v-icon>home</v-icon>
+          </v-list-tile-action>
+          <v-list-tile-content>
+            <v-list-tile-title>Home</v-list-tile-title>
+          </v-list-tile-content>
+        </v-list-tile>
       </v-list>
     </v-navigation-drawer>
-    <v-toolbar class="cyan" light>
+    <v-toolbar class="indigo" dark>
+      <v-spacer></v-spacer>
       <v-toolbar-title>Toolbar</v-toolbar-title>
+      <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
     </v-toolbar>
     <main>
       <v-container fluid>
         <!--v-router-->
       </v-container>
     </main>
+    <v-footer class="indigo">
+      <span class="white--text">&copy; 2017</span>
+    </v-footer>
   </v-app>
 </template>
 
@@ -35,12 +39,7 @@
   export default {
     data () {
       return {
-        drawer: null,
-        items: [
-          { title: 'Home', icon: 'dashboard' },
-          { title: 'About', icon: 'question_answer' }
-        ],
-        right: null
+        drawer: true
       }
     }
   }
