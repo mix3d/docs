@@ -9,6 +9,8 @@
   const meta = require('../router/meta.json')
 
   export default {
+    name: 'App',
+
     components: {
       default: require('layouts/Default'),
       home: require('layouts/Home')
@@ -21,7 +23,7 @@
     },
 
     created () {
-      if (process.env.VUE_ENV === 'client') return
+      if (process.env.VUE_ENV !== 'server') return
 
       const metaData = meta[this.$route.path] || {}
       const section = this.$route.path.split('/')
@@ -128,11 +130,12 @@
 
 <style lang="stylus">
   @import './stylus/main'
-  
+
   [data-app] > main > .container
     min-height: calc(100vh - 156px)
 
   #app
     transition: .3s ease-in-out
-  
 </style>
+
+<style src="../node_modules/mdi/css/materialdesignicons.css"></style>

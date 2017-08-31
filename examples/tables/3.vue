@@ -27,7 +27,7 @@
               slot="input"
               label="Edit"
               v-bind:value="props.item.name"
-              v-on:change="val => props.item.name = val"
+              v-on:change="e => props.item.name = e.target.value"
               single-line counter="counter"
             ></v-text-field>
           </v-edit-dialog>
@@ -38,21 +38,19 @@
         <td class="text-xs-right">{{ props.item.protein }}</td>
         <td class="text-xs-right">{{ props.item.sodium }}</td>
         <td class="text-xs-right">{{ props.item.calcium }}</td>
-        <td>
+        <td class="text-xs-right">
           <v-edit-dialog
-            class="text-xs-right"
             @open="props.item._iron = props.item.iron"
             @cancel="props.item.iron = props.item._iron || props.item.iron"
             large
             lazy
           >
-            <div class="text-xs-right">{{ props.item.iron }}</div>
+            <div>{{ props.item.iron }}</div>
             <div slot="input" class="mt-3 title">Update Iron</div>
             <v-text-field
               slot="input"
               label="Edit"
-              v-bind:value="props.item.iron"
-              v-on:blur="val => props.item.iron = val"
+              v-model="props.item.iron"
               single-line
               counter
               autofocus
@@ -76,7 +74,7 @@
         headers: [
           {
             text: 'Dessert (100g serving)',
-            left: true,
+            align: 'left',
             sortable: false,
             value: 'name'
           },

@@ -6,75 +6,82 @@
     dark
     enable-resize-watcher
   )
-    v-list.pa-0.vuetify
-      v-list-item
+    v-toolbar(flat).transparent
+      v-list.pa-0.vuetify
         v-list-tile(avatar tag="div")
           v-list-tile-avatar
             router-link(to="/")
               img(src="/static/v.png" v-bind:style="filter")
-          v-list-tile-content.show-overflow
-            v-menu(transition="v-scale-transition" origin="top")
-              v-list-tile-title(slot="activator")
-                span Vuetify
-                v-icon(light) arrow_drop_down
-              v-list(class="grey darken-2")
-                v-list-item
-                  v-list-tile(href="https://github.com/vuetifyjs/vuetify" target="_blank")
-                    v-list-tile-action
-                      v-icon(fa light) github
-                    v-list-tile-title Github
-                v-list-item
-                  v-list-tile(href="https://gitter.im/vuetifyjs/Lobby/~chat#" target="_blank")
-                    v-list-tile-action
-                      v-icon(fa light) comments-o
-                    v-list-tile-title Chat
-                v-list-item
-                  v-list-tile(href="https://twitter.com/vuetifyjs" target="_blank")
-                    v-list-tile-action
-                      v-icon(fa light) twitter
-                    v-list-tile-title Twitter
-                v-list-item
-                  v-list-tile(href="https://www.facebook.com/vuetifyjs" target="_blank")
-                    v-list-tile-action
-                      v-icon(fa light) facebook
-                    v-list-tile-title Facebook
-          v-spacer
+          v-list-tile-content
+            v-list-tile-title Vuetify
+            v-list-tile-sub-title Branch: {{ $store.state.release }}
           v-list-tile-action
-            v-btn(icon light v-on:click.native.stop="mini = !mini")
+            v-btn(icon dark v-on:click.stop="mini = !mini")
               v-icon chevron_left
     v-divider
+    v-card(flat dark).py-2.your-logo-here
+      v-layout(fill-height)
+        v-flex.text-xs-center
+          div
+            em Your Logo Here
+          v-btn(
+            round
+            href="https://patreon.com/vuetify"
+            target="_blank"
+            rel="noopener"
+            small
+            dark
+            primary
+          ).elevation-0 Find out how
     v-list(dense)
       template(v-for="item in items")
         v-list-group(v-if="item.items" v-bind:group="item.group")
           v-list-tile(slot="item" ripple)
             v-list-tile-action
-              v-icon(light) {{ item.action }}
+              v-icon(dark) {{ item.action }}
             v-list-tile-content
               v-list-tile-title {{ item.title }}
             v-list-tile-action
-              v-icon(light) keyboard_arrow_down
-          v-list-item(v-for="subItem in item.items" v-bind:key="subItem")
-            v-list-tile(
-              :href="subItem.href"
-              v-bind:router="!subItem.target"
-              ripple
-              v-bind:disabled="subItem.disabled"
-              v-bind:target="subItem.target"
-            )
-              v-list-tile-content
-                v-list-tile-title {{ subItem.title }}
-              v-list-tile-action(v-if="subItem.action")
-                v-icon(light class="success--text") {{ subItem.action }}
-        v-subheader(v-else-if="item.header" light) {{ item.header }}
+              v-icon(dark) keyboard_arrow_down
+          v-list-tile(
+            v-for="subItem in item.items" v-bind:key="subItem.title"
+            v-bind="{ \
+              to: !subItem.target ? subItem.href : null, \
+              href: subItem.target && subItem.href \
+            }"
+            ripple
+            v-bind:disabled="subItem.disabled"
+            v-bind:target="subItem.target"
+          )
+            v-list-tile-content
+              v-list-tile-title {{ subItem.title }}
+            v-list-tile-action(v-if="subItem.action")
+              v-icon(dark :class="[subItem.actionClass || 'success--text']") {{ subItem.action }}
+        v-subheader(v-else-if="item.header" dark) {{ item.header }}
         v-divider(v-else-if="item.divider")
-        v-list-item(v-else)
-          v-list-tile(:href="item.href" router ripple v-bind:disabled="item.disabled")
-            v-list-tile-action
-              v-icon(light) {{ item.action }}
-            v-list-tile-content
-              v-list-tile-title {{ item.title }}
-            v-list-tile-action(v-if="item.subAction")
-              v-icon(light class="success--text") {{ item.subAction }}
+        v-list-tile(
+          v-bind="{ \
+            to: !item.target ? item.href : null, \
+            href: item.target && item.href \
+          }"
+          ripple
+          v-bind:disabled="item.disabled"
+          v-bind:target="item.target"
+          rel="noopener"
+          v-else
+        )
+          v-list-tile-action
+            v-icon(dark) {{ item.action }}
+          v-list-tile-content
+            v-list-tile-title {{ item.title }}
+          v-list-tile-action(v-if="item.subAction")
+            v-icon(dark class="success--text") {{ item.subAction }}
+          v-chip(
+            v-else-if="item.chip"
+            label
+            small
+            class="caption blue lighten-2 white--text mx-0"
+          ) {{ item.chip }}
 </template>
 
 <script>
@@ -89,15 +96,25 @@
             action: 'apps',
             group: 'vuetify',
             items: [
-              { href: '/vuetify/quick-start', title: 'Quick start' }
+              { href: '/vuetify/quick-start', title: 'Quick start' },
+              { href: '/vuetify/why-vuetify', title: 'Why Vuetify?' },
+              { href: '/vuetify/frequently-asked-questions', title: 'Frequently asked questions' },
+              { href: '/vuetify/sponsors-and-backers', title: 'Sponsors and backers' },
+              { href: '/vuetify/contributing', title: 'Contributing' }
             ]
           },
           {
-            title: 'Motion',
-            action: 'slow_motion_video',
-            group: 'motion',
+            title: 'Layout',
+            action: 'devices',
+            group: 'layout',
             items: [
-              { href: '/motion/transitions', title: 'Transitions' }
+              { href: '/layout/pre-defined', title: 'Pre-defined', action: 'star', actionClass: 'white--text' },
+              { href: '/layout/grid', title: 'Grid' },
+              { href: '/layout/spacing', title: 'Spacing' },
+              { href: '/layout/alignment', title: 'Alignment' },
+              { href: '/layout/display', title: 'Display' },
+              { href: '/layout/elevation', title: 'Elevation' },
+              { href: '/layout/sandbox', title: 'Sandbox' }
             ]
           },
           {
@@ -112,16 +129,11 @@
             ]
           },
           {
-            title: 'Layout',
-            action: 'devices',
-            group: 'layout',
+            title: 'Motion',
+            action: 'slow_motion_video',
+            group: 'motion',
             items: [
-              { href: '/layout/pre-defined', title: 'Pre-defined' },
-              { href: '/layout/grid', title: 'Grid' },
-              { href: '/layout/spacing', title: 'Spacing' },
-              { href: '/layout/alignment', title: 'Alignment' },
-              { href: '/layout/display', title: 'Display' },
-              { href: '/layout/elevation', title: 'Elevation' }
+              { href: '/motion/transitions', title: 'Transitions' }
             ]
           },
           {
@@ -133,6 +145,7 @@
               { href: '/components/breadcrumbs', title: 'Breadcrumbs' },
               { href: '/components/bottom-navigation', title: 'Bottom navigation' },
               { href: '/components/buttons', title: 'Buttons' },
+              { href: '/components/floating-action-buttons', title: 'Buttons: Floating Action Buttons' },
               { href: '/components/cards', title: 'Cards' },
               { href: '/components/carousels', title: 'Carousel' },
               { href: '/components/chips', title: 'Chips' },
@@ -141,6 +154,7 @@
               { href: '/components/dividers', title: 'Dividers' },
               { href: '/components/expansion-panels', title: 'Expansion panels' },
               { href: '/components/footer', title: 'Footer' },
+              { href: '/components/grid-lists', title: 'Grid Lists' },
               { href: '/components/icons', title: 'Icons' },
               { href: '/components/lists', title: 'Lists' },
               { href: '/components/menus', title: 'Menus' },
@@ -166,9 +180,19 @@
             group: '/directives',
             items: [
               { href: '/directives/badges', title: 'Badges' },
+              { href: '/directives/resizing', title: 'Resizing' },
               { href: '/directives/ripples', title: 'Ripples' },
-              { href: '/directives/tooltips', title: 'Tooltips' }
+              { href: '/directives/scrolling', title: 'Scrolling' },
+              { href: '/directives/tooltips', title: 'Tooltips' },
+              { href: '/directives/touch-support', title: 'Touch Support' }
             ]
+          },
+          {
+            href: 'https://vuetify.threadless.com',
+            title: 'Shop',
+            target: '_blank',
+            action: 'shopping_cart',
+            chip: 'NEW'
           },
           { divider: true },
           { header: 'Additional resources' },
@@ -183,9 +207,9 @@
                 action: 'whatshot'
               },
               {
-                href: 'https://gitter.im/vuetifyjs/Lobby/~chat#',
+                href: 'https://chat.vuetifyjs.com',
                 target: '_blank',
-                title: 'Chat'
+                title: 'Community'
               }
             ]
           },
@@ -251,7 +275,7 @@
   }
 </script>
 
-<style lang="stylus">
+<style lang="stylus" scoped>
   .vuetify
     .router-link-active
       display: flex
@@ -259,4 +283,7 @@
 
     .list__tile__avatar img
       border-radius: 0 !important
+  
+  .navigation-drawer--mini-variant .your-logo-here
+    display: none
 </style>

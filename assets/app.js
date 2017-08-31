@@ -1,9 +1,12 @@
+// Polyfills for IE Support
 import 'babel-polyfill'
 import 'event-source-polyfill'
+
+
 import Vue from 'vue'
 import App from './App.vue'
 import Vuetify from 'vuetify'
-import Components from 'components/_index'
+import Components from '../components'
 
 import { createStore } from 'store/index'
 import { createRouter } from 'router/index'

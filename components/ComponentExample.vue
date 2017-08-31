@@ -2,10 +2,10 @@
   div.component-example
     v-card
       v-card-title(v-bind:class="[currentColor]")
-        span.white--text(v-text="header")
+        span.headline.white--text(v-text="header")
         v-spacer
         v-btn(
-          light
+          dark
           icon
           tag="a"
           v-bind:href="'https://github.com/vuetifyjs/docs/tree/master/examples/'+file+'.vue'"
@@ -14,7 +14,7 @@
         )
           v-icon edit
         v-btn(
-          light
+          dark
           icon
           v-on:click.native.stop="panel = !panel"
           v-tooltip:left="{ html: 'View source' }"
@@ -22,8 +22,8 @@
           v-icon code
       v-expansion-panel.elevation-0.component-example__panel
         v-expansion-panel-content(v-model="panel")
-          v-tabs(ref="tabs" light)
-            v-tabs-bar(slot="activators" v-bind:class="[currentColor]" class="darken-4")
+          v-tabs(ref="tabs" dark :scrollable="false")
+            v-tabs-bar(slot="activators" v-bind:class="[currentColor]" class="darken-4 pl-0")
               v-tabs-slider(class="lighten-4" v-bind:class="[currentColor]")
               v-tabs-item(
                 v-for="tab in tabs"
@@ -38,15 +38,18 @@
             )
               markup(:lang="getLang(tab)" v-if="parsed[tab]").ma-0
                 div(v-html="parsed[tab]")
-      v-card-text.subheading
+      v-card-text.subheading.justify
         slot(name="desc")
-      v-card-text.pa-3
+      v-card-text
         div(v-bind:id="'example-'+uid")
     v-divider.my-5
 </template>
 
 <script>
   import Vue from 'vue'
+  const release = process.env.RELEASE
+  const path = require('path')
+  const resolve = (file) => path.resolve(__dirname, file)
 
   export default {
     data () {
@@ -60,7 +63,8 @@
           script: null,
           style: null,
           template: null
-        }
+        },
+        url: release ? 'releases/' + release + '/' : ''
       }
     },
 
@@ -88,7 +92,11 @@
     mounted () {
       this.uid = this._uid
       const vm = this
-      import('../examples/'+this.file+'.vue').then(comp => {
+      import(
+        /* webpackChunkName: "examples" */
+        /* webpackMode: "lazy-once" */
+        `../examples/${this.file}.vue`
+      ).then(comp => {
         this.instance = new Vue(comp)
         this.instance.$mount('#example-'+vm.uid)
       })
@@ -98,7 +106,7 @@
     methods: {
       getLang (tab) {
         if (tab === 'script') return 'js'
-        if (tab === 'style') return 'stylus'
+        if (tab === 'style') return 'css'
         return 'html'
       },
       parseTemplate (target, template) {
@@ -125,7 +133,7 @@
         const xmlhttp = new XMLHttpRequest()
         const vm = this
         const timeout = setTimeout(() => this.loading = true, 500)
-        xmlhttp.open('GET', `/examples/${file}.vue`, true)
+        xmlhttp.open('GET', `/${this.url}examples/${file}.vue`, true)
 
         xmlhttp.onreadystatechange = function () {
           if(xmlhttp.status == 200 && xmlhttp.readyState == 4) {
@@ -157,6 +165,12 @@
       > li
         border: none
 
+    .justify
+      text-align: justify
+
     nav.toolbar
       z-index: 0
+
+    [data-app]
+      min-height: 300px
 </style>

@@ -15,6 +15,8 @@
           |   &lt;/main&gt;
           |   &lt;v-footer&gt;&lt;/v-footer&gt;
           |&lt;/v-app&gt;
+        v-alert(info value="true") Keep in mind that for the purposes of these docs, the <code>v-navigation-drawer</code>'s have had their overflow removed and set to absolute positioning. In your application, you can choose to omit these properties.
+    v-alert(error value="true") In order for your application to work properly, you <strong>must</strong> wrap it in a <code>v-app</code> component. If you absolutely cannot wrap your application, you must add corresponding class for your chosen theme. <strong>"application--light"</strong> or <strong>"application--dark"</strong>.
 </template>
 
 <script>
@@ -67,7 +69,59 @@
               file: 'layouts/8',
               desc: `Vuetify also supports the dark application theme. This will not override components that have default themes so in some cases it will be necessary to manually set the dark theme accents.`
             }
-          ]
+          ],
+          props: {
+            'v-app': {
+              shared: ['theme'],
+              params: [
+                [
+                  'id',
+                  'String',
+                  'app',
+                  'The id for your application'
+                ],
+                [
+                  'footer',
+                  'Boolean',
+                  'False',
+                  'Configures the application to have a footer'
+                ],
+                [
+                  'fixed-footer',
+                  'Boolean',
+                  'False',
+                  'Configures the application to have a fixed footer'
+                ],
+                [
+                  'toolbar',
+                  'Boolean',
+                  'False',
+                  'Configures the application to have a fixed toolbar'
+                ],
+                [
+                  'fill-height',
+                  'Boolean',
+                  'False',
+                  'Container will fill all available height and center its contents vertically'
+                ]
+              ]
+            }
+          },
+          slots: {
+            'v-app': {
+              shared: ['default']
+            }
+          },
+          functional: {
+            'v-app': {
+              params: [
+                [
+                 'v-spacer',
+                 'Spacer for flexbox grids'
+                ]
+              ]
+            }
+          }
         }
       }
     }
@@ -75,25 +129,23 @@
 </script>
 
 <style lang="stylus">
-  @import '../node_modules/vuetify/src/stylus/settings/_colors'
-  @import '../node_modules/vuetify/src/stylus/tools/_elevations'
-
   #layouts-view
     .component-example
       position: relative
       z-index: 0
 
       [data-app]
+        border: 1px solid rgba(#000, .1)
         overflow: hidden
-        height: 400px
+        min-height: 0
         elevation(2)
 
-        .navigation-drawer, .toolbar, .overlay
+        .navigation-drawer, .toolbar:not(.elevation-0), .overlay
           position: absolute
 
         main .container
           min-height: calc(400px - 36px) !important
 
-        .navigation-drawer
-          height: 400px !important
+        .footer
+          height: 36px
 </style>

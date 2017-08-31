@@ -1,5 +1,5 @@
 <template lang="pug">
-  v-app
+  v-app(toolbar footer)
     main-navigation
     main-toolbar
     main
@@ -7,6 +7,9 @@
         transition(name="slide" mode="out-in")
           router-view
     main-footer
+    //v-speed-dial(bottom right direction="top" fixed)
+      v-btn(slot="activator" fab dark @click="toTop").red
+        v-icon keyboard_arrow_up
 </template>
 
 <script>
@@ -19,6 +22,12 @@
       MainNavigation,
       MainToolbar,
       MainFooter
+    },
+
+    methods: {
+      toTop () {
+        window.scrollTo(0, 0)
+      }
     }
   }
 </script>

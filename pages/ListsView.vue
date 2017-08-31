@@ -11,7 +11,7 @@
       return {
         doc: {
           title: 'List',
-          component: 'list',
+          component: 'lists',
           edit: 'ListsView',
           desc: 'The <code>v-list</code> component is used to display information. It can contain an avatar, content, actions, subheaders and much more. Lists can contain children and are used in the sidebar.',
           examples: [
@@ -24,7 +24,8 @@
             { header: 'Card image with toolbar and list', file: 'lists/7', desc: `A list can be combined with a card.` },
             { header: 'Title with sub-title, actions and action-text', file: 'lists/8', desc: `A list can contain a stack within an action. Ripple and router props can be passed through the main v-list, to the v-list-tile or as a property in the items array.` },
             { header: 'Action with title and sub-title', file: 'lists/9', desc: `A list can contain up to 3 lines.` },
-            { header: 'Expansion Lists', file: 'lists/10', desc: `A list can contain a group of items which will display on click. Expansion lists are also used within the <code>sidebar</code> component.` }
+            { header: 'Expansion Lists', file: 'lists/10', desc: `A list can contain a group of items which will display on click. Expansion lists are also used within the <code>sidebar</code> component.` },
+            { header: 'Dark scheme', file: 'lists/11', desc: `A list can assume the alternate scheme color of dark.` }
           ],
           props: {
             'v-list': {
@@ -63,12 +64,6 @@
                   'Boolean',
                   'False',
                   'Used to set minimum tile height on a single-line list item'
-                ],
-                [
-                  'ripple',
-                  'Boolean',
-                  'False',
-                  'Designates whether the list tiles will attach the ripple directive'
                 ]
               ],
               model: {
@@ -108,7 +103,6 @@
           functional: {
             'v-list': {
               params: [
-                ['v-list-item', 'list__item'],
                 ['v-list-tile-action', 'list__tile__action--stack'],
                 ['v-list-tile-action-text', 'list__tile__action-text'],
                 ['v-list-tile-avatar', 'list__tile__avatar'],
@@ -120,9 +114,6 @@
           },
           slots: {
             'v-list': {
-              shared: ['default']
-            },
-            'v-list-item': {
               shared: ['default']
             },
             'v-list-tile': {

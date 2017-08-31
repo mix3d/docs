@@ -18,6 +18,7 @@
           ],
           props: {
             'v-subheader': {
+              shared: ['theme'],
               params: [
                 [
                   'inset',

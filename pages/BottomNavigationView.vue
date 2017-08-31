@@ -44,25 +44,6 @@
           }
         }
       }
-    },
-
-    mounted () {
-      this.$emit('view', this.meta())
-    },
-
-    preFetch () {
-      return this.methods.meta()
-    },
-
-    methods: {
-      meta () {
-        return {
-          title: 'Bottom navigation Component | Vuetify.js',
-          h1: 'Bottom navigation',
-          description: 'Bottom navigation component for Vuetify Framework',
-          keywords: 'vuetify, bottom navigation, navigation, component'
-        }
-      }
     }
   }
 </script>

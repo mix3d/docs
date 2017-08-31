@@ -1,9 +1,13 @@
+// Config and utils
 const path = require('path')
 const webpack = require('webpack')
 const vueConfig = require('./vue-loader.config')
+
+// Plugins
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
 
+// Helpers
 const isProd = process.env.NODE_ENV === 'production'
 const resolve = (file) => path.resolve(__dirname, file)
 
@@ -21,7 +25,7 @@ module.exports = {
     alias: {
       'assets': resolve('../assets'),
       'components': resolve('../components'),
-      'examples': resolve('../pages/examples'),
+      'examples': resolve('../examples'),
       'layouts': resolve('../layouts'),
       'pages': resolve('../pages'),
       'public': resolve('../public'),
@@ -32,7 +36,10 @@ module.exports = {
     }
   },
   module: {
-    noParse: /es6-promise\.js$/, // avoid webpack shimming process
+    noParse: [
+      /es6-promise\.js$/,
+      /releases/
+    ], // avoid webpack shimming process
     rules: [
       {
         test: /\.vue$/,
@@ -42,14 +49,17 @@ module.exports = {
       {
         test: /\.js$/,
         loader: 'babel-loader',
+        options: {
+          presets: ['es2015']
+        },
         exclude: /node_modules/
       },
       {
         test: /\.styl$/,
-        loader: ['style', 'css', 'stylus']
+        loader: ['style-loader', 'css-loader', 'stylus-loader']
       },
       {
-        test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
+        test: /\.(png|jpe?g|gif|svg|eot|ttf|woff|woff2)(\?.*)?$/,
         loader: 'url-loader',
         query: {
           limit: 10000,
@@ -64,9 +74,7 @@ module.exports = {
   },
   plugins: isProd
     ? [
-        new webpack.optimize.UglifyJsPlugin({
-          compress: { warnings: false }
-        }),
+        new webpack.optimize.UglifyJsPlugin(),
         new ExtractTextPlugin({
           filename: 'common.[chunkhash].css'
         })

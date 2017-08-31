@@ -1,8 +1,8 @@
 <template>
-  <v-app id="example-2">
-    <v-navigation-drawer persistent light :mini-variant.sync="mini" v-model="drawer">
-      <v-list class="pa-0">
-        <v-list-item>
+  <v-app id="example-2" toolbar>
+    <v-navigation-drawer absolute persistent light :mini-variant.sync="mini" v-model="drawer" overflow>
+      <v-toolbar flat class="transparent">
+        <v-list class="pa-0">
           <v-list-tile avatar tag="div">
             <v-list-tile-avatar>
               <img src="https://randomuser.me/api/portraits/men/85.jpg" />
@@ -16,24 +16,22 @@
               </v-btn>
             </v-list-tile-action>
           </v-list-tile>
-        </v-list-item>
-      </v-list>
+        </v-list>
+      </v-toolbar>
       <v-list class="pt-0" dense>
         <v-divider></v-divider>
-        <v-list-item v-for="item in items" :key="item">
-          <v-list-tile>
-            <v-list-tile-action>
-              <v-icon>{{ item.icon }}</v-icon>
-            </v-list-tile-action>
-            <v-list-tile-content>
-              <v-list-tile-title>{{ item.title }}</v-list-tile-title>
-            </v-list-tile-content>
-          </v-list-tile>
-        </v-list-item>
+        <v-list-tile v-for="item in items" :key="item.title">
+          <v-list-tile-action>
+            <v-icon>{{ item.icon }}</v-icon>
+          </v-list-tile-action>
+          <v-list-tile-content>
+            <v-list-tile-title>{{ item.title }}</v-list-tile-title>
+          </v-list-tile-content>
+        </v-list-tile>
       </v-list>
     </v-navigation-drawer>
-    <v-toolbar fixed class="indigo darken-4" light>
-      <v-toolbar-side-icon light @click.native.stop="drawer = !drawer"></v-toolbar-side-icon>
+    <v-toolbar fixed class="indigo darken-4" dark>
+      <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
       <v-toolbar-title>Toolbar</v-toolbar-title>
     </v-toolbar>
     <main>

@@ -16,13 +16,16 @@
           <p>If you want to programmatically open or close the dialog, you can do so by using <code>v-model</code> with a boolean value. Keep in mind, if the trigger for the opening is not contained within the <code>activator</code> slot and is done so by a click, you must <strong>stopPropagation</strong> to avoid immediately triggering a close event.</p>`,
           examples: [
             { header: 'Simple dialogs', file: 'dialogs/1', desc: `Choosing an option immediately commits the option and closes the menu. Touching outside of the dialog, or pressing Back, cancels the action and closes the dialog.` },
+            { header: 'Without activator', file: 'dialogs/7', desc: `If for some reason you are unable to use the activator slot, be sure to add the <code>.stop</code> modifier to the event that triggers the dialog.` },
             { header: 'Modal', file: 'dialogs/2', desc: `Similar to a Simple Dialog, except that it's not dismissed when touching outside.` },
             { header: 'Fullscreen', file: 'dialogs/3', desc: `Due to limited space, full-screen dialogs may be more appropriate for mobile devices than dialogs used on devices with larger screens.` },
             { header: 'Form', file: 'dialogs/4', desc: `Just a simple example of a form in a dialog.` },
-            { header: 'Scrollable', file: 'dialogs/5', desc: `Example of a dialog with scrollable content.` }
+            { header: 'Scrollable', file: 'dialogs/5', desc: `Example of a dialog with scrollable content.` },
+            { header: 'Overflowed', file: 'dialogs/6', desc: `Modals that do not fit within the available window space will scroll the container.` },
           ],
           props: {
             'v-dialog': {
+              shared: ['overlay', 'detachable'],
               params: [
                 [
                   'persistent',
@@ -43,12 +46,6 @@
                   'Lazily load dialog contents'
                 ],
                 [
-                  'hide-overlay',
-                  'Boolean',
-                  'False',
-                  'Hide the display of the overlay',
-                ],
-                [
                   'transition',
                   '[Boolean, String]',
                   'v-modal-transition',
@@ -58,7 +55,7 @@
                   'scrollable',
                   'Boolean',
                   'False',
-                  'When set to true, expects a card, card-title, card-text and card-row with the actions prop. Will set card-row to scroll'
+                  'When set to true, expects a card, card-title, card-text and card-actions. Will set card-text to overflow-y'
                 ],
                 [
                   'disabled',

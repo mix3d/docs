@@ -11,5 +11,6 @@
   "/components/toasts": "/components/snackbars",
   "/components/carousel": "/components/carousels",
   "/components/datatables": "/components/data-tables",
-  "/components/expansion-panel": "/components/expansion-panels"
+  "/components/expansion-panel": "/components/expansion-panels",
+  "/vuetify/sandbox": "/layout/sandbox"
 }

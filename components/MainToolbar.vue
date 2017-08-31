@@ -1,7 +1,7 @@
 <template lang="pug">
-  v-toolbar(:class="[color]" fixed light)#main-toolbar
-    v-toolbar-side-icon( light
-      v-on:click.native.stop="$store.commit('vuetify/SIDEBAR', !$store.state.sidebar)"
+  v-toolbar(:class="[color]" fixed dark)#main-toolbar
+    v-toolbar-side-icon(
+      v-on:click.stop="$store.commit('vuetify/SIDEBAR', !$store.state.sidebar)"
     )
 
     transition(name="slide" mode="out-in")
@@ -11,11 +11,37 @@
         v-bind:key="title"
         class="flexbox"
       )
+    v-spacer
+    v-menu
+      v-btn(flat slot="activator" dark class="hidden-sm-and-down") Version: {{ release === releases[0] ? `Latest (${release})` : release }}
+        v-icon(dark) arrow_drop_down
+      v-list
+        v-list-tile(
+          to="/"
+          v-for="(release, i) in releases"
+          v-if="i === 0"
+          v-bind:key="release"
+        )
+          v-list-tile-title {{ release }}
+        v-list-tile(
+          tag="a"
+          v-else
+          :href="`/releases/${release}`"
+        )
+          v-list-tile-title {{ release }}
 </template>
 
 <script>
+  import { mapState } from 'vuex'
+
   export default {
+    name: 'toolbar',
+
     computed: {
+      ...mapState([
+        'releases',
+        'release'
+      ]),
       color () {
         return this.$store.state.currentColor
       },
