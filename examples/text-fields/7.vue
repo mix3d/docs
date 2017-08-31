@@ -37,7 +37,6 @@
               name="input-7-3"
               label="Label Text"
               value="The Woodman set to work at once, and so sharp was his axe that the tree was soon chopped nearly through."
-              single-line
               multi-line
             ></v-text-field>
           </v-flex>
@@ -57,5 +56,5 @@
         </v-layout>
       </v-container>
     </v-card-text>
-</v-card>
+  </v-card>
 </template>

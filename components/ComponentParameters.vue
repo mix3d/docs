@@ -7,10 +7,10 @@
         single-line
         v-bind:items="items"
         v-model="component"
-        bottom
+        auto
       )
       v-spacer
-      v-spacer
+      v-spacer.hidden-sm-and-down
       v-text-field(
         append-icon="search"
         label="Search..."
@@ -24,9 +24,8 @@
       v-bind:items="table"
       hide-actions
     )
-      template(slot="items" scope="props")
-        template(v-for="prop in props")
-          td(v-for="opt in prop" v-bind:key="opt" v-html="opt")
+      template(slot="items" scope="{ item }")
+          td(v-for="(opt, i) in item" v-bind:key="i" v-html="opt")
 </template>
 
 <script>
@@ -36,12 +35,19 @@
         component: Object.keys(this.data)[0],
         search: '',
         shared: {
+          dialog: this.makeDialog(),
           contextual: this.makeContextual(),
           router: this.makeRouter(),
           default: this.makeSlot(),
           theme: this.makeTheme(),
           input: this.makeInput(),
-          overlay: this.makeOverlay()
+          label: this.makeLabel(),
+          overlay: this.makeOverlay(),
+          detachable: this.makeDetach(),
+          positionable: this.makePosition(),
+          transitionable: this.makeTransition(),
+          colorable: this.makeColorable(),
+          filterable: this.makeFilter()
         }
       }
     },
@@ -63,7 +69,7 @@
 
     methods: {
       parseComponent (c) {
-        let params = c.params || []
+        let params = (c.params || []).slice()
 
         c.shared && c.shared.forEach(s => {
           params = params.concat(this.shared[s])
@@ -80,11 +86,83 @@
           }
         })
       },
+      makeDialog () {
+        return [
+          [
+            'persistent',
+            'Boolean',
+            'False',
+            'Clicking outside will not dismiss the dialog'
+          ],
+          [
+            'lazy',
+            'Boolean',
+            'False',
+            'Lazily load dialog contents'
+          ],
+          [
+            'scrollable',
+            'Boolean',
+            'False',
+            'When set to true, expects a card, card-title, card-text and card-actions. Will set card-text to overflow-y'
+          ],
+          [
+            'disabled',
+            'Boolean',
+            'False',
+            'Disabled the ability to open the dialog.'
+          ],
+          [
+            'width',
+            '[String, Number]',
+            '320',
+            'The modal width. Cannot exceed 90% of the screen'
+          ]
+        ]
+      },
+      makeFilter () {
+        return [
+          [
+            'no-data-text',
+            'String',
+            'No data available',
+            'Display text when there is no data'
+          ],
+          [
+            'filter',
+            'Function',
+            'See component file',
+            'The function used for filtering items'
+          ]
+        ]
+      },
+      makeDetach () {
+        return [[
+          'content-class', 'String', '-', 'Applies a custom class to the detached element. This is useful because the content is moved to the end of the app and is not targettable by classes passed directly on the component.'
+        ]]
+      },
+      makePosition () {
+        return [
+          ['absolute', 'Boolean', 'False', 'Position the component absolutely.'],
+          ['bottom', 'Boolean', 'False', 'Align the component towards the bottom.'],
+          ['fixed', 'Boolean', 'False', 'Position the component fixed.'],
+          ['right', 'Boolean', 'False', 'Align the component towards the right.'],
+          ['left', 'Boolean', 'False', 'Align the component towards the left.'],
+          ['top', 'Boolean', 'False', 'Align the component towards the top.'],
+        ]
+      },
       makeSlot () {
         return [[
           'default',
           'Default Vue slot'
         ]]
+      },
+      makeTransition () {
+        return [
+          ['mode', 'String', '-', 'Sets the transition mode (does not apply to transition-group)'],
+          ['origin', 'String', '-', 'Sets the transition origin'],
+          ['transition', 'String', '-', 'Sets the component transition. Can be one of the built in transitions or your own.']
+        ]
       },
       makeModel (model) {
         if (!model) return false
@@ -100,6 +178,12 @@
         return ['primary', 'secondary', 'success', 'info', 'warning', 'error'].map(c => {
           return [ c, 'Boolean', 'False', `Applies the ${c} contextual color` ]
         })
+      },
+      makeLabel () {
+        return [[
+          'label',
+          'Label slot'
+        ]]
       },
       makeTheme () {
         return [
@@ -174,12 +258,6 @@
             'Applies ripple effect'
           ],
           [
-            'router',
-            'Boolean',
-            'False',
-            'Designates whether the list tiles will be a router-link'
-          ],
-          [
             'tag',
             'String',
             'a',
@@ -208,7 +286,7 @@
             'Puts the input in an error state'
           ],
           [
-            'errors',
+            'error-messages',
             'Array',
             '[]',
             'Puts the input in an error state and passes through custom error messsages. Will be combined with any validations that occur from the <code>rules</code> prop. This field will not trigger validation.'
@@ -280,7 +358,7 @@
             'Tabindex of input'
           ],
           [
-            'placholder',
+            'placeholder',
             'String',
             '-',
             'Placeholder text'
@@ -290,6 +368,12 @@
             'Boolean',
             'False',
             'Hides hint, validation errors'
+          ],
+          [
+            'toggle-keys',
+            'Array',
+            '[13, 32]',
+            "Array of key codes that will toggle the input (if it supports toggling)"
           ]
         ]
       },
@@ -300,6 +384,16 @@
             'Boolean',
             'False',
             'Hide the display of the overlay'
+          ]
+        ]
+      },
+      makeColorable () {
+        return [
+          [
+            'color',
+            'String',
+            '-',
+            'Applies specified color to the control'
           ]
         ]
       }

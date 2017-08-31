@@ -11,17 +11,35 @@
     "description": "Get started with Vue and Vuetify in no time.",
     "keywords": "quick start, vuetify templates, get started"
   },
-  "/vuetify/sandbox": {
-    "h1": "Sandbox",
-    "title": "Sandbox",
-    "description": "Play around with the available configuring options for your next application.",
-    "keywords": "sandbox, vuetify, layout sandbox"
+  "/vuetify/why-vuetify": {
+    "h1": "Why use Vuetify?",
+    "title": "Why Vuetify?",
+    "description": "Why you should choose Vuetify over other Vue frameworks.",
+    "keywords": "why vuetify, why vue, why choose vuetify"
   },
   "/vuetify/frequently-asked-questions": {
     "h1": "Frequently asked questions",
     "title": "Frequently asked questions",
     "description": "Stuck on a problem? Check these frequently asked questions.",
     "keywords": "frequently asked questions, faq"
+  },
+  "/vuetify/sponsors-and-backers": {
+    "h1": "Sponsors and backers",
+    "title": "Sponsors and backers",
+    "description": "Help support Vuetify.js by backing the development of new features",
+    "keywords": "sponsor, backer, donations"
+  },
+  "/vuetify/contributing": {
+    "h1": "Contributing",
+    "title": "Contributing",
+    "description": "Help develop Vuetify with new features and functionality.",
+    "keywords": "contribute, contributing, feature request"
+  },
+  "/vuetify/roadmap": {
+    "h1": "Roadmap",
+    "title": "Roadmap",
+    "description": "The upcoming planned features and new functionality coming to Vuetify. New vue components, new directives, and much much more!.",
+    "keywords": "roadmap, future plans"
   },
   "/motion/transitions": {
     "h1": "Transitions",
@@ -31,8 +49,8 @@
   },
   "/style/colors": {
     "h1": "Colors",
-    "title": "Material color pallete",
-    "description": "Easily apply any color from the material design pallete.",
+    "title": "Material color palette",
+    "description": "Easily apply any color from the material design palette.",
     "keywords": "colors"
   },
   "/style/theme": {
@@ -89,11 +107,23 @@
     "description": "Elevation helper classes allow you to control relative depth, or distance, between two surfaces along the z-axis.",
     "keywords": "elevation helper classes"
   },
+  "/layout/sandbox": {
+    "h1": "Sandbox",
+    "title": "Sandbox",
+    "description": "Play around with the available configuring options for your next application.",
+    "keywords": "sandbox, vuetify, layout sandbox"
+  },
   "/components/alerts": {
     "h1": "Alerts",
     "title": "Alert Component",
     "description": "The v-alert component is used to convey information to the user. Designed to stand out, the alerts come in four contextual styles, success, info, warning, and error.",
     "keywords": "alerts, components"
+  },
+  "/components/avatars": {
+    "h1": "Avatars",
+    "title": "Avatar Component",
+    "description": "The v-avatar component is used to control the size and border radius of an image.",
+    "keywords": "avatars, components"
   },
   "/components/breadcrumbs": {
     "h1": "Breadcrumbs",
@@ -107,6 +137,12 @@
     "description": "The v-bottom-nav component is primarily for mobile use and acts as the primary navigation.",
     "keywords": "bottom nav, material nav, nav, bottom navigation, navigation"
   },
+  "/components/bottom-sheets": {
+    "h1": "Bottom sheets",
+    "title": "Bottom sheets",
+    "description": "The v-bottom-sheets component is used for elevating content above other elements in a dialog style fashion",
+    "keywords": "bottom sheets, bottom dialog, bottom modal"
+  },
   "/components/cards": {
     "h1": "Cards",
     "title": "Cards",
@@ -118,6 +154,12 @@
     "title": "Button Component",
     "description": "Button component for Vuetify Framework.",
     "keywords": "vuetify, buttons, components"
+  },
+  "/components/floating-action-buttons": {
+    "h1": "Floating Action Buttons",
+    "title": "Floating Action Button Component",
+    "description": "Floating Action Button component for Vuetify Framework.",
+    "keywords": "vuetify, buttons, fab, floating button, floating action button"
   },
   "/components/carousels": {
     "h1": "Carousels",
@@ -160,6 +202,18 @@
     "title": "Footer Component",
     "description": "Footer component for Vuetify Framework",
     "keywords": "footer"
+  },
+  "/components/forms": {
+    "h1": "Forms",
+    "title": "Form Component",
+    "description": "Form component for Vuetify Framework",
+    "keywords": "form"
+  },
+  "/components/grid-lists": {
+    "h1": "Grid lists",
+    "title": "Grid List Component",
+    "description": "Grid list component for Vuetify Framework",
+    "keywords": "grid lists, grid"
   },
   "/components/icons": {
     "h1": "Icons",
@@ -275,17 +329,41 @@
     "description": "Badges directive for the Vuetify framework.",
     "keywords": "badges"
   },
+  "/directives/resizing": {
+    "h1": "Resizing",
+    "title": "Resizing",
+    "description": "Resize directive for the Vuetify framework.",
+    "keywords": "resize, resize directive, window resize directive"
+  },
   "/directives/ripples": {
     "h1": "Ripple",
     "title": "Ripple",
     "description": "Ripple directive for the Vuetify framework.",
     "keywords": "ripples, ink"
   },
+  "/directives/scrolling": {
+    "h1": "Scrolling",
+    "title": "Scrolling",
+    "description": "Scroll directive for the Vuetify framework.",
+    "keywords": "scroll, scroll directive, window scroll directive"
+  },
   "/directives/tooltips": {
     "h1": "Tooltip",
     "title": "Tooltip",
     "description": "Tooltip directive for the Vuetify framework.",
     "keywords": "tooltips"
+  },
+  "/directives/touch-support": {
+    "h1": "Touch Support",
+    "title": "Touch Support",
+    "description": "Touch directive for the Vuetify framework.",
+    "keywords": "touch, touch directive, mobile touch directive"
+  },
+  "/pre-made-themes": {
+    "h1": "Pre-made themes",
+    "title": "Free / Premium Themes",
+    "description": "Vuetify offers numerous pre-build starter and premium themes. Kickstart your next application today, no design skills needed.",
+    "keywords": "vuetify themes, pre-built material themes, premium themes"
   },
   "/guides/server-side-rendering": {
     "h1": "Server side rendering",

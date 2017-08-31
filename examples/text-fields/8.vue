@@ -39,7 +39,6 @@
               name="input-7-2"
               label="Label Text"
               value="The Woodman set to work at once, and so sharp was his axe that the tree was soon chopped nearly through."
-              single-line
               multi-line
               dark
             ></v-text-field>

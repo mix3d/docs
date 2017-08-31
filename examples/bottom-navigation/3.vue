@@ -3,16 +3,16 @@
     <v-card-text class="text-xs-center">
       <v-btn flat primary @click.native="e31 = !e31">Toggle Nav</v-btn>
     </v-card-text>
-    <v-bottom-nav absolute :value="e31" class="transparent">
-      <v-btn flat dark class="teal--text" @click.native="e3 = 1" :value="e3 === 1">
+    <v-bottom-nav absolute :value="e31" :active.sync="e3" class="transparent">
+      <v-btn flat class="teal--text">
         <span>Recents</span>
         <v-icon>history</v-icon>
       </v-btn>
-      <v-btn flat dark class="teal--text" @click.native="e3 = 2" :value="e3 === 2">
+      <v-btn flat class="teal--text">
         <span>Favorites</span>
         <v-icon>favorite</v-icon>
       </v-btn>
-      <v-btn flat dark class="teal--text" @click.native="e3 = 3" :value="e3 === 3">
+      <v-btn flat class="teal--text">
         <span>Nearby</span>
         <v-icon>place</v-icon>
       </v-btn>

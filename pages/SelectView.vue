@@ -1,4 +1,4 @@
-<template lang="pug">
+﻿<template lang="pug">
   component-view(v-bind:doc="doc")
 </template>
 
@@ -16,12 +16,20 @@
             { header: 'Dark theme', file: 'selects/2', desc: 'Selects also support themeing, dark and light.' },
             { header: 'Icons', file: 'selects/3', desc: 'Use a custom prepended or appended icon.' },
             { header: 'Multiple', file: 'selects/4', desc: `A multi-select can utilize v-chip as the display for selected items.` },
-            { header: 'Scoped slots', file: 'selects/5', desc: `With the power of scoped slots, you can customize the visual output of the select. In this example we add a profile picture for both the chips and list items.` },
-            { header: 'Customized item text and value', file: 'selects/6', desc: `You can specify the specific properties within your items array correspond to the text and value fields. By default, this is <strong>text</strong> and <strong>value</strong>. In this example we also use the <code>return-object</code> prop which will return the entire object of the selected item on selection.` }
+            { header: 'Autocomplete', file: 'selects/5', desc: `Provides type-ahead autocomplete functionality.` },
+            { header: 'Scoped slots', file: 'selects/6', desc: `With the power of scoped slots, you can customize the visual output of the select. In this example we add a profile picture for both the chips and list items.` },
+            { header: 'Customized item text and value', file: 'selects/7', desc: `You can specify the specific properties within your items array correspond to the text and value fields. By default, this is <strong>text</strong> and <strong>value</strong>. In this example we also use the <code>return-object</code> prop which will return the entire object of the selected item on selection.` }
           ],
           props: {
             'v-select': {
+              shared: ['input', 'filterable'],
               params: [
+                [
+                  'allow-overflow',
+                  'Boolean',
+                  'False',
+                  'Removes content/window overflow detection'
+                ],
                 [
                   'chips',
                   'Boolean',
@@ -47,6 +55,12 @@
                   'Set property of <code>items</code> define option\'s value'
                 ],
                 [
+                  'item-disabled',
+                  'String',
+                  'disabled',
+                  `Set property of <code>items</code>'s disabled value`
+                ],
+                [
                   'max-height',
                   'Number, String',
                   '200',
@@ -59,70 +73,46 @@
                   'Changes select to multiple. Accepts array for v-model'
                 ],
                 [
+                  'min-width',
+                  '[Boolean, Number, String]',
+                  'False',
+                  'Sets the minimum width of the select, overwrites automatic determination'
+                ],
+                [
                   'single-line',
                   'Boolean',
                   'False',
                   'Removes floating label'
                 ],
                 [
-                  'light',
-                  'Boolean',
-                  'True',
-                  'Applies the light theme'
-                ],
-                [
-                  'dark',
+                  'solo',
                   'Boolean',
                   'False',
-                  'Applies the dark theme'
+                  'Changes the style of the text-field for use in toolbars'
                 ],
                 [
-                  'disabled',
+                  'auto',
                   'Boolean',
                   'False',
-                  'Disables input'
+                  'Centers list on selected element',
                 ],
                 [
-                  'hint',
-                  'String',
-                  '-',
-                  'Sets hint text'
-                ],
-                [
-                  'persistent-hint',
+                  'autocomplete',
                   'Boolean',
                   'False',
-                  'Forces hint visible'
+                  'Filter the items in the list based on user input'
                 ],
                 [
-                  'label',
-                  'String',
-                  '-',
-                  'Sets select label'
-                ],
-                [
-                  'append-icon',
-                  'String',
-                  'arrow_drop_down',
-                  'Changes the dropdown icon'
-                ],
-                [
-                  'prepend-icon',
-                  'String',
-                  '-',
-                  'Prepend an icon to the select'
-                ],
-                [
-                  'required',
+                  'return-object',
                   'Boolean',
                   'False',
-                  'Designates the input as required'
+                  'Changes the selection behavior to return the object directly rather than the value specified with item-value'
                 ],
                 [
-                  'rules',
-                  'Array',
-                  '[]',
-                  "Array of functions that return either True or a String with an error message"
+                  'search-input',
+                  'String',
+                  'null',
+                  'Bound when using the autocomplete prop. Use the .sync modifier to catch user input from the autocomplete search input'
                 ],
               ],
               model: {
@@ -130,6 +120,11 @@
                 default: '-',
                 description: 'Single select requires model, multiple requires array'
               }
+            }
+          },
+          slots: {
+            'v-select': {
+              shared: ['label']
             }
           },
           events: {

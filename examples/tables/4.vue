@@ -8,9 +8,9 @@
       hide-actions
       class="elevation-1"
     >
-      <template slot="headers" scope="props">
-        <span v-tooltip:bottom="{ 'html': props.item.text }">
-          {{ props.item.text }}
+      <template slot="headerCell" scope="props">
+        <span v-tooltip:bottom="{ 'html': props.header.text }">
+          {{ props.header.text }}
         </span>
       </template>
       <template slot="items" scope="props">
@@ -25,7 +25,7 @@
       </template>
     </v-data-table>
     <div class="text-xs-center pt-2">
-      <v-pagination v-model="pagination.page" :length="Math.ceil(pagination.totalItems / pagination.rowsPerPage)"></v-pagination>
+      <v-pagination v-model="pagination.page" :length="pages"></v-pagination>
     </div>
   </div>
 </template>
@@ -40,7 +40,7 @@
         headers: [
           {
             text: 'Dessert (100g serving)',
-            left: true,
+            align: 'left',
             sortable: false,
             value: 'name'
           },
@@ -164,6 +164,11 @@
             iron: '6%'
           }
         ]
+      }
+    },
+    computed: {
+      pages () {
+        return this.pagination.rowsPerPage ? Math.ceil(this.items.length / this.pagination.rowsPerPage) : 0
       }
     }
   }

@@ -19,16 +19,15 @@
       <template slot="items" scope="props">
         <td>
           <v-edit-dialog
-            @open="props.item._name = props.item.name"
-            @cancel="props.item.name = props.item._name || props.item.name"
             lazy
           > {{ props.item.name }}
             <v-text-field
               slot="input"
               label="Edit"
-              v-bind:value="props.item.name"
-              v-on:change="val => props.item.name = val"
-              single-line counter="counter"
+              v-model="props.item.name"
+              single-line
+              counter
+              :rules="[max25chars]"
             ></v-text-field>
           </v-edit-dialog>
         </td>
@@ -38,24 +37,23 @@
         <td class="text-xs-right">{{ props.item.protein }}</td>
         <td class="text-xs-right">{{ props.item.sodium }}</td>
         <td class="text-xs-right">{{ props.item.calcium }}</td>
-        <td>
+        <td class="text-xs-right">
           <v-edit-dialog
-            class="text-xs-right"
-            @open="props.item._iron = props.item.iron"
-            @cancel="props.item.iron = props.item._iron || props.item.iron"
+            @open="tmp = props.item.iron"
+            @save="props.item.iron = tmp || props.item.iron"
             large
             lazy
           >
-            <div class="text-xs-right">{{ props.item.iron }}</div>
+            <div>{{ props.item.iron }}</div>
             <div slot="input" class="mt-3 title">Update Iron</div>
             <v-text-field
               slot="input"
               label="Edit"
-              v-bind:value="props.item.iron"
-              v-on:blur="val => props.item.iron = val"
+              v-model="tmp"
               single-line
               counter
               autofocus
+              :rules="[max25chars]"
             ></v-text-field>
           </v-edit-dialog>
         </td>
@@ -71,12 +69,14 @@
   export default {
     data () {
       return {
+        max25chars: (v) => v.length <= 25 || 'Input too long!',
+        tmp: '',
         search: '',
         pagination: {},
         headers: [
           {
             text: 'Dessert (100g serving)',
-            left: true,
+            align: 'left',
             sortable: false,
             value: 'name'
           },

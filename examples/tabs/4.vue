@@ -1,29 +1,34 @@
 <template>
-  <v-tabs id="mobile-tabs-4" grow icons light>
-    <v-tabs-bar slot="activators">
-      <v-tabs-slider></v-tabs-slider>
-      <v-tabs-item href="#mobile-tabs-4-1">
-        Recents
-        <v-icon>phone</v-icon>
-      </v-tabs-item>
-      <v-tabs-item href="#mobile-tabs-4-2">
-        Favorites
-        <v-icon>favorite</v-icon>
-      </v-tabs-item>
-      <v-tabs-item href="#mobile-tabs-4-3">
-        Nearby
-        <v-icon>account_box</v-icon>
-      </v-tabs-item>
-    </v-tabs-bar>
-    <v-tabs-content
-      v-for="i in 3"
-      :key="i"
-      :id="'mobile-tabs-4-' + i"
-    >
-      <v-card flat>
-        <v-card-text>{{ text }}</v-card-text>
-      </v-card>
-    </v-tabs-content>
+  <v-tabs dark fixed centered>
+    <v-toolbar class="cyan">
+      <v-text-field
+        solo
+        label="Search"
+        append-icon="keyboard_voice"
+        prepend-icon="search"
+      ></v-text-field>
+      <v-tabs-bar class="cyan" slot="extension">
+        <v-tabs-slider class="yellow"></v-tabs-slider>
+        <v-tabs-item
+          v-for="i in 3"
+          :key="i"
+          :href="'#tab-' + i"
+        >
+          Item {{ i }}
+        </v-tabs-item>
+      </v-tabs-bar>
+    </v-toolbar>
+    <v-tabs-items>
+      <v-tabs-content
+        v-for="i in 3"
+        :key="i"
+        :id="'tab-' + i"
+      >
+        <v-card flat>
+          <v-card-text>{{ text }}</v-card-text>
+        </v-card>
+      </v-tabs-content>
+    </v-tabs-items>
   </v-tabs>
 </template>
 

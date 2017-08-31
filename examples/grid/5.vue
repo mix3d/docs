@@ -1,26 +1,35 @@
 <template>
-  <div id="example-5">
-    <v-layout row-sm column child-flex-sm>
-      <v-card class="primary ma-1">
-        <v-card-text>one</v-card-text>
-      </v-card>
-      <v-card class="secondary ma-1">
-        <v-card-text>two</v-card-text>
-      </v-card>
-      <v-card class="accent ma-1">
-        <v-card-text>three</v-card-text>
-      </v-card>
+  <v-container grid-list-xl>
+    <v-layout v-bind="binding">
+      <v-flex>
+        <v-card dark class="primary">
+          <v-card-text>one</v-card-text>
+        </v-card>
+      </v-flex>
+      <v-flex>
+        <v-card dark class="secondary">
+          <v-card-text>two</v-card-text>
+        </v-card>
+      </v-flex>
+      <v-flex>
+        <v-card dark class="accent">
+          <v-card-text>three</v-card-text>
+        </v-card>
+      </v-flex>
     </v-layout>
-  </div>
+  </v-container>
 </template>
 
-<style>
-  #example-5 {
-    color: #fff;
-    text-align: center;
-  }
+<script>
+  export default {
+    computed: {
+      binding () {
+        const binding = {}
 
-  #example-5 .card {
-    margin-bottom: 16px;
+        if (this.$vuetify.breakpoint.mdAndUp) binding.column = true
+
+        return binding
+      }
+    }
   }
-</style>
+</script>

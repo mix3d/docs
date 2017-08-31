@@ -1,10 +1,36 @@
 <template>
-  <v-app-bar>
-    <v-btn-dropdown v-bind:options="dropdown_font" max-height="auto" overflow></v-btn-dropdown>
-    <v-btn-dropdown v-bind:options="dropdown_edit" max-height="auto" overflow editable></v-btn-dropdown>
-    <v-btn-toggle v-bind:options="toggle_options_multiple" v-model="toggle_multiple" multiple class="hidden-md-and-down"></v-btn-toggle>
-    <v-btn-toggle v-bind:options="toggle_options" v-model="toggle_exclusive" class="hidden-sm-and-down"></v-btn-toggle>
-  </v-app-bar>
+  <v-toolbar>
+    <v-select v-bind:items="dropdown_font" overflow label="Select font" hide-details></v-select>
+    <v-select v-bind:items="dropdown_edit" overflow label="Select size" hide-details editable></v-select>
+    <v-btn-toggle v-model="toggle_multiple" multiple>
+      <v-btn icon :value="1">
+        <v-icon>format_bold</v-icon>
+      </v-btn>
+      <v-btn icon :value="2">
+        <v-icon>format_italic</v-icon>
+      </v-btn>
+      <v-btn icon :value="3">
+        <v-icon>format_underlined</v-icon>
+      </v-btn>
+      <v-btn icon :value="4">
+        <v-icon>format_color_fill</v-icon>
+      </v-btn>
+    </v-btn-toggle>
+    <v-btn-toggle v-model="toggle_exclusive">
+      <v-btn icon :value="1">
+        <v-icon>format_align_left</v-icon>
+      </v-btn>
+      <v-btn icon :value="2">
+        <v-icon>format_align_center</v-icon>
+      </v-btn>
+      <v-btn icon :value="3">
+        <v-icon>format_align_right</v-icon>
+      </v-btn>
+      <v-btn icon :value="4">
+        <v-icon>format_align_justify</v-icon>
+      </v-btn>
+    </v-btn-toggle>
+  </v-toolbar>
 </template>
 
 <script>
@@ -25,19 +51,7 @@
           { text: '0%' }
         ],
         toggle_exclusive: 2,
-        toggle_multiple: [1, 2, 3],
-        toggle_options: [
-          { icon: 'format_align_left', value: 1 },
-          { icon: 'format_align_center', value: 2 },
-          { icon: 'format_align_right', value: 3 },
-          { icon: 'format_align_justify', value: 4 },
-        ],
-        toggle_options_multiple: [
-          { icon: 'format_bold', value: 1 },
-          { icon: 'format_italic', value: 2 },
-          { icon: 'format_underlined', value: 3 },
-          { icon: 'format_color_fill', value: 4 },
-        ],
+        toggle_multiple: [1, 2, 3]
       }
     }
   }

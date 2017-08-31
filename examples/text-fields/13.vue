@@ -12,11 +12,12 @@
               label="Legal first name"
               class="mt-5"
               v-model="first"
+              :rules="[() => first || 'This field is required']"
               required
             ></v-text-field>
             <v-text-field
               label="Legal middle name"
-              hint="example of helper text only on focus"
+              hint="This field is not required"
               v-model="middle"
             ></v-text-field>
             <v-text-field
@@ -24,6 +25,7 @@
               hint="example of persistent helper text"
               persistent-hint
               v-model="last"
+              :rules="[() => last || 'This field is required']"
               required
             ></v-text-field>
             <small>*indicates required field</small>

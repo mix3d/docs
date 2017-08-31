@@ -1,6 +1,6 @@
 <template lang="pug">
   .view(id="elevation-view")
-    v-layout(column-xs row-sm)
+    v-layout(row)
       v-flex(xs12 sm8 md12)
         section-def
           dt(slot="title") Elevation
@@ -14,18 +14,11 @@
       v-container(fluid)
         v-layout(row)
           v-flex(xs4)
-            v-select(
-              label="Select elevation"
-              v-bind:items="elevations"
-              v-model="selected"
-              item-text="text"
-              item-value="class"
-              return-object
-            )
+            v-slider(prepend-icon="fa-arrows-h" v-model="selected" min="0" max="24" thumb-label)
           v-flex(xs6 offset-xs1)
-            v-card(v-bind:class="example.classes")
+            v-card(v-bind:class="{ [`elevation-${selected}`]: true }")
               v-card-text
-                p.text-xs-center.ma-0 {{ example.elevation }}
+                p.text-xs-center.ma-0 Elevation {{ selected }}
 </template>
 
 <script>
@@ -34,26 +27,8 @@
 
     data () {
       return {
-        example: {
-          classes: [],
-          elevation: ''
-        },
-        elevations: Array.from(Array(25).keys()).map(i => ({ text: `elevation-${i}`, class: `class="elevation-${i}"` }) ),
-        selected: { text: `elevation-1`, class: `class="elevation-1"` }
+        selected: 0
       }
-    },
-
-    watch: {
-      selected () {
-        this.example = {
-          classes: [this.selected.text],
-          elevation: this.selected.class
-        }
-      }
-    },
-
-    mounted () {
-      this.selected = this.elevations[1]
     }
   }
 </script>

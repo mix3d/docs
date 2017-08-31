@@ -1,11 +1,12 @@
 <template lang="pug">
   div(class="view" id="display-view")
-    v-layout(column-xs row-sm)
+    v-layout(row)
       v-flex(xs12 sm8 md12)
         section-def
           dt(slot="title") Display
           dd(slot="desc") The display helpers allow you to control the displaying of content based upon viewport width.
       ad
+    grid
     section
       h6 Viewport sizes
       ul.mb-5
@@ -35,9 +36,3 @@
     name: 'display-view'
   }
 </script>
-
-<style lang="stylus">
-  #display-view
-    .toolbar
-      height: 64px
-</style>

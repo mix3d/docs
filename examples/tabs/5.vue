@@ -1,26 +1,31 @@
 <template>
-  <v-tabs id="mobile-tabs-5" grow light>
-    <v-tabs-bar slot="activators">
-      <v-tabs-slider></v-tabs-slider>
-      <v-tabs-item href="#mobile-tabs-5-1">
+  <v-tabs dark fixed icons centered>
+    <v-tabs-bar class="cyan">
+      <v-tabs-slider class="yellow"></v-tabs-slider>
+      <v-tabs-item href="#tab-1">
         <v-icon>phone</v-icon>
+        Recents
       </v-tabs-item>
-      <v-tabs-item href="#mobile-tabs-5-2">
+      <v-tabs-item href="#tab-2">
         <v-icon>favorite</v-icon>
+        Favorites
       </v-tabs-item>
-      <v-tabs-item href="#mobile-tabs-5-3">
+      <v-tabs-item href="#tab-3">
         <v-icon>account_box</v-icon>
+        Nearby
       </v-tabs-item>
     </v-tabs-bar>
-    <v-tabs-content
-      v-for="i in 3"
-      :key="i"
-      :id="'mobile-tabs-5-' + i"
-    >
-      <v-card flat>
-        <v-card-text>{{ text }}</v-card-text>
-      </v-card>
-    </v-tabs-content>
+    <v-tabs-items>
+      <v-tabs-content
+        v-for="i in 3"
+        :key="i"
+        :id="'tab-' + i"
+      >
+        <v-card flat>
+          <v-card-text>{{ text }}</v-card-text>
+        </v-card>
+      </v-tabs-content>
+    </v-tabs-items>
   </v-tabs>
 </template>
 

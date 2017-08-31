@@ -21,7 +21,8 @@ export function createStore () {
         color: 'green',
         route: '/components/breadcrumbs'
       },
-      releases
+      releases,
+      release: '0.14'
     },
 
     actions: {},

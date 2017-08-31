@@ -1,30 +1,26 @@
 <template lang="pug">
   div.view(v-bind:id="`${doc.title.toLowerCase().replace(' ', '-')}-view`")
-    v-layout(column-xs row-sm)
+    v-layout(row wrap)
       v-flex(xs12 sm8 md12)
         section-def(v-bind:doc="doc")
           dt(slot="title" v-text="doc.title")
           dd(slot="desc" v-html="doc.desc")
           v-divider
-          v-card-row(actions)
-            div.do-not-remove-this
-              v-btn(
-                tag="a"
-                v-bind:href="'https://github.com/vuetifyjs/vuetify/tree/master/src/components/'+doc.component"
-                target="_blank"
-                icon
-                light
-                v-tooltip:right="{ html: 'View component' }"
-                v-if="doc.component"
-                v-bind:class="[`${currentColor}--text`]"
-              )
-                v-icon widgets
+          v-card-actions
             v-btn(
-              tag="a"
-              v-bind:href="'https://github.com/vuetifyjs/docs/tree/master/src/pages/'+doc.edit+'.vue'"
+              v-bind:href="'https://github.com/vuetifyjs/vuetify/tree/master/src/'+componentLink"
               target="_blank"
               icon
-              light
+              v-tooltip:right="{ html: `View ${doc.directive ? 'Directive' : 'Component'}` }"
+              v-if="componentLink"
+              v-bind:class="[`${currentColor}--text`]"
+            )
+              v-icon widgets
+            v-btn(
+              tag="a"
+              v-bind:href="'https://github.com/vuetifyjs/docs/tree/master/pages/'+doc.edit+'.vue'"
+              target="_blank"
+              icon
               v-tooltip:right="{ html: 'Edit this page' }"
               v-if="doc.edit"
               v-bind:class="[`${currentColor}--text`]"
@@ -44,33 +40,35 @@
     section-header Examples
     component-example(
       v-for="(example, i) in doc.examples"
-      v-bind:key="example"
+      v-bind:key="i"
       v-bind:header="`#${i + 1} ${example.header}`"
       v-bind:file="example.file"
+      v-bind:id="`example-${i + 1}`"
     )
       div(slot="desc" v-html="example.desc" v-if="example.desc")
     slot
     template(v-if="doc.props")
       section-header.mt-5(id="api") API
-      v-tabs(v-model="tabs" light).elevation-1
-        v-tabs-bar(slot="activators" v-bind:class="[currentColor]")
+      v-tabs(v-model="tabs" dark v-bind:scrollable="false").elevation-1
+        v-tabs-bar(v-bind:class="[currentColor]")
           v-tabs-slider(v-bind:class="[currentColor]").lighten-4
           v-tabs-item(
-            v-for="p in ['props', 'slots', 'events', 'functional']"
+            v-for="(p, i) in ['props', 'slots', 'events', 'functional']"
             v-show="doc[p]"
             v-bind:href="`#${p}`"
-            v-bind:key="p"
+            v-bind:key="i"
           ) {{ p }}
-        v-tabs-content(
-          v-for="p in ['props', 'slots', 'events', 'functional']"
-          v-if="doc[p]"
-          v-bind:id="p"
-          v-bind:key="p"
-        )
-          component-parameters(
-            v-bind:headers="headers[p]"
-            v-bind:data="doc[p]"
+        v-tabs-items
+          v-tabs-content(
+            v-for="(p, i) in ['props', 'slots', 'events', 'functional']"
+            v-if="doc[p]"
+            v-bind:id="p"
+            v-bind:key="i"
           )
+            component-parameters(
+              v-bind:headers="headers[p]"
+              v-bind:data="doc[p]"
+            )
 </template>
 
 <script>
@@ -85,22 +83,22 @@
         },
         headers: {
           props: [
-            { text: 'Option', value: 'prop', left: true },
-            { text: 'Type(s)', value: 'type', left: true },
-            { text: 'Default', value: 'default', left: true },
-            { text: 'Description', value: 'desc', left: true }
+            { text: 'Option', value: 'prop', align: 'left' },
+            { text: 'Type(s)', value: 'type', align: 'left' },
+            { text: 'Default', value: 'default', align: 'left' },
+            { text: 'Description', value: 'desc', align: 'left' }
           ],
           slots: [
-            { text: 'Name', value: 'name', left: true },
-            { text: 'Description', value: 'description', left: true }
+            { text: 'Name', value: 'name', align: 'left' },
+            { text: 'Description', value: 'description', align: 'left' }
           ],
           events: [
-            { text: 'Name', value: 'name', left: true },
-            { text: 'Description', value: 'description', left: true }
+            { text: 'Name', value: 'name', align: 'left' },
+            { text: 'Description', value: 'description', align: 'left' }
           ],
           functional: [
-            { text: 'Name', value: 'name', left: true },
-            { text: 'Description', value: 'description', left: true }
+            { text: 'Name', value: 'name', align: 'left' },
+            { text: 'Description', value: 'description', align: 'left' }
           ]
         },
         tabs: null
@@ -112,6 +110,11 @@
     },
 
     computed: {
+      componentLink () {
+        if (this.doc.component) return `components/${this.doc.component}`
+        if (this.doc.directive) return `directives/${this.doc.directive}`
+        return false
+      },
       currentColor () {
         return this.$store.state.currentColor
       }

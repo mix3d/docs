@@ -11,7 +11,7 @@
       return {
         doc: {
           title: 'List',
-          component: 'list',
+          component: 'lists',
           edit: 'ListsView',
           desc: 'The <code>v-list</code> component is used to display information. It can contain an avatar, content, actions, subheaders and much more. Lists can contain children and are used in the sidebar.',
           examples: [
@@ -64,12 +64,6 @@
                   'Boolean',
                   'False',
                   'Used to set minimum tile height on a single-line list item'
-                ],
-                [
-                  'ripple',
-                  'Boolean',
-                  'False',
-                  'Designates whether the list tiles will attach the ripple directive'
                 ]
               ],
               model: {
@@ -109,7 +103,6 @@
           functional: {
             'v-list': {
               params: [
-                ['v-list-item', 'list__item'],
                 ['v-list-tile-action', 'list__tile__action--stack'],
                 ['v-list-tile-action-text', 'list__tile__action-text'],
                 ['v-list-tile-avatar', 'list__tile__avatar'],
@@ -121,9 +114,6 @@
           },
           slots: {
             'v-list': {
-              shared: ['default']
-            },
-            'v-list-item': {
               shared: ['default']
             },
             'v-list-tile': {

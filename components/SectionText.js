@@ -1,7 +1,9 @@
 export default {
   functional: true,
 
-  render (h, context) {
-    return h('div', { 'class': 'section-text' }, [context.children])
+  render (h, { data, children }) {
+    data.staticClass = (`section-text ${data.staticClass || ''}`).trim()
+
+    return h('div', data, children)
   }
 }

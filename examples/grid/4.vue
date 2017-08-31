@@ -1,39 +1,38 @@
 <template>
-  <div id="example-4">
-    <v-container fluid>
-      <v-layout row justify-space-between>
-        <v-card class="primary">
+  <v-container fluid grid-list-xl>
+    <v-layout row justify-space-between>
+      <v-flex xs2>
+        <v-card dark class="primary">
           <v-card-text>one</v-card-text>
         </v-card>
-        <v-card class="secondary">
+      </v-flex>
+      <v-flex xs2>
+        <v-card dark class="secondary">
           <v-card-text>two</v-card-text>
         </v-card>
-        <v-card class="accent">
+      </v-flex>
+      <v-flex xs2>
+        <v-card dark class="accent">
           <v-card-text>three</v-card-text>
         </v-card>
-      </v-layout>
-      <v-layout row justify-space-around>
-        <v-card class="primary">
+      </v-flex>
+    </v-layout>
+    <v-layout row justify-space-around>
+      <v-flex xs2>
+        <v-card dark class="primary">
           <v-card-text>one</v-card-text>
         </v-card>
-        <v-card class="secondary">
+      </v-flex>
+      <v-flex xs2>
+        <v-card dark class="secondary">
           <v-card-text>two</v-card-text>
         </v-card>
-        <v-card class="accent">
+      </v-flex>
+      <v-flex xs2>
+        <v-card dark class="accent">
           <v-card-text>three</v-card-text>
         </v-card>
-      </v-layout>
-    </v-container>
-  </div>
+      </v-flex>
+    </v-layout>
+  </v-container>
 </template>
-
-<style>
-  #example-4 {
-    color: #fff;
-    text-align: center;
-  }
-
-  #example-4 .card {
-    margin-bottom: 16px;
-  }
-</style>

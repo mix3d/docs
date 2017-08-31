@@ -1,15 +1,16 @@
 <template>
   <v-card height="200px">
-    <v-bottom-nav absolute value="true" class="transparent">
-      <v-btn flat dark class="teal--text" @click.native="e1 = 1" :value="e1 === 1">
-        <span>Recents</span>
+    <div class="headline text-xs-center pa-5">Active: {{ e1 }}</div>
+    <v-bottom-nav absolute :value="true" :active.sync="e1" class="transparent">
+      <v-btn flat class="teal--text" value="recent">
+        <span>Recent</span>
         <v-icon>history</v-icon>
       </v-btn>
-      <v-btn flat dark class="teal--text" @click.native="e1 = 2" :value="e1 === 2">
+      <v-btn flat class="teal--text" value="favorites">
         <span>Favorites</span>
         <v-icon>favorite</v-icon>
       </v-btn>
-      <v-btn flat dark class="teal--text" @click.native="e1 = 3" :value="e1 === 3">
+      <v-btn flat class="teal--text" value="nearby">
         <span>Nearby</span>
         <v-icon>place</v-icon>
       </v-btn>
@@ -21,7 +22,7 @@
   export default {
     data () {
       return {
-        e1: 2
+        e1: 'recent'
       }
     }
   }

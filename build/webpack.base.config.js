@@ -49,14 +49,17 @@ module.exports = {
       {
         test: /\.js$/,
         loader: 'babel-loader',
+        options: {
+          presets: ['es2015']
+        },
         exclude: /node_modules/
       },
       {
         test: /\.styl$/,
-        loader: ['style', 'css', 'stylus']
+        loader: ['style-loader', 'css-loader', 'stylus-loader']
       },
       {
-        test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
+        test: /\.(png|jpe?g|gif|svg|eot|ttf|woff|woff2)(\?.*)?$/,
         loader: 'url-loader',
         query: {
           limit: 10000,
@@ -71,9 +74,7 @@ module.exports = {
   },
   plugins: isProd
     ? [
-        new webpack.optimize.UglifyJsPlugin({
-          compress: { warnings: false }
-        }),
+        new webpack.optimize.UglifyJsPlugin(),
         new ExtractTextPlugin({
           filename: 'common.[chunkhash].css'
         })
